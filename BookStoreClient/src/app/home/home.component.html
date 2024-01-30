@@ -1,0 +1,81 @@
+<div class="row mt-1">
+  <div class="col-sm-12 col-md-4 col-lg-3 col-12">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>{{ "categories" | translate }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input type="search" class="form-control" placeholder="{{ 'search' | translate }}">
+        </div>
+        <ul class="categories">
+          <li>{{ "lifestyle" | translate }}</li>
+          <li>{{ "jordan" | translate }}</li>
+          <li>{{ "running" | translate }}</li>
+          <li>{{ "basketball" | translate }}</li>
+          <li>{{ "football" | translate }}</li>
+          <li>{{ "training" | translate }}</li>
+          <li>{{ "tennis" | translate }}</li>
+          <li>{{ "walking" | translate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-8 col-lg-9 col-12">
+
+    <div class="input-group mb-2">
+      <span class="input-group-text" id="basic-addon-1">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+      <input type="search" class="form-control" placeholder="{{ 'search' | translate }}">
+    </div>
+
+    <div class="row">
+      <div
+        *ngFor="let item of numbers"
+        class="col-xl-4 col-md-6 col-sm-6 col-lg-4 col-xxl-3 col-12 d-flex justify-content-center"
+      >
+        <div class="card mb-2" style="width: 260px">
+          <div class="card-header">
+            <img
+            src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/50789b51-87a9-4d52-89b8-0f7f788138ac/pegasus-39-shield-hava-%C5%9Fartlar%C4%B1na-dayan%C4%B1kl%C4%B1-yol-ko%C5%9Fu-ayakkab%C4%B1s%C4%B1-Fp3SPv.png"
+            class="card-img-top"
+            alt="..."
+          />
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Nike Pegasus 39 Shield</h5>
+            <p class="card-text">
+              Hava Şartlarına Dayanıklı Erkek Yol Koşu Ayakkabısı
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <h5 class="card-text">9800₺</h5>
+            <a class="btn btn-dark w-100"><i class="fa-solid fa-cart-shopping"></i> {{"addchart" | translate}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav aria-label="Page navigation example" style="float: right">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

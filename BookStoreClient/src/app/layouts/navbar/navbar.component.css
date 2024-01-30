@@ -1,0 +1,10 @@
+.langSelect {
+    cursor: pointer;
+    margin: 0;
+}
+
+.navbar-brand{
+    border: 1px solid;
+    border-radius: 50px;
+    padding: 4px;
+}
