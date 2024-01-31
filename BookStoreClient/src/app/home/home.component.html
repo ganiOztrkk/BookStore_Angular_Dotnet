@@ -1,10 +1,12 @@
 <div class="row mt-1">
+  <!-- side bar -->
   <div class="col-sm-12 col-md-4 col-lg-3 col-12">
     <div class="card">
       <div class="card-header text-center">
         <h3>{{ "categories" | translate }}</h3>
       </div>
       <div class="card-body">
+        <!-- category search -->
         <div class="input-group mb-2">
           <span class="input-group-text" id="basic-addon-1">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -15,6 +17,9 @@
             placeholder="{{ 'search' | translate }}"
           />
         </div>
+        <!-- category search -->
+
+        <!-- category list -->
         <ul class="categories">
           <li>{{ "lifestyle" | translate }}</li>
           <li>{{ "jordan" | translate }}</li>
@@ -25,22 +30,31 @@
           <li>{{ "tennis" | translate }}</li>
           <li>{{ "walking" | translate }}</li>
         </ul>
+        <!-- category list -->
       </div>
     </div>
   </div>
+  <!-- side bar -->
 
+  <!-- content -->
   <div class="col-sm-12 col-md-8 col-lg-9 col-12">
+    <!-- product search -->
     <div class="input-group mb-2">
       <span class="input-group-text" id="basic-addon-1">
         <i class="fa-solid fa-magnifying-glass"></i>
       </span>
       <input
+        [(ngModel)]="request.search"
+        (keydown.enter)="getAll(request.pageNumber)"
+        (search)="getAll(1)"
         type="search"
         class="form-control"
         placeholder="{{ 'search' | translate }}"
       />
     </div>
+    <!-- product search -->
 
+    <!-- product cards -->
     <div class="row">
       <div
         *ngFor="let item of response?.data"
@@ -66,38 +80,35 @@
         </div>
       </div>
     </div>
+    <!-- product cards -->
 
+    <!-- pagination -->
     <div class="d-flex justify-content-center">
       <nav aria-label="Page navigation example" style="float: right">
         <ul class="pagination">
-          <li 
-          class="page-item"
-          *ngIf="!response.isFirstPage"
-          >
-            <a 
-            class="page-link"
-            aria-label="Previous"
-            (click)="getAll(response.pageNumber -1)"
+          <li class="page-item" *ngIf="!response.isFirstPage">
+            <a
+              class="page-link"
+              aria-label="Previous"
+              (click)="getAll(response.pageNumber - 1)"
             >
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
 
-          <li 
-          class="page-item" 
-          *ngFor="let item of pageNumbers"
-          [ngClass]="response.pageNumber === item ? 'active' : ''"
+          <li
+            class="page-item"
+            *ngFor="let item of pageNumbers"
+            [ngClass]="response.pageNumber === item ? 'active' : ''"
           >
             <a class="page-link" (click)="getAll(item)">{{ item }}</a>
           </li>
 
-          <li 
-          class="page-item"
-          *ngIf="!response.isLastPage"
-          >
-            <a class="page-link"
-            aria-label="Next"
-            (click)="getAll(response.pageNumber + 1)"
+          <li class="page-item" *ngIf="!response.isLastPage">
+            <a
+              class="page-link"
+              aria-label="Next"
+              (click)="getAll(response.pageNumber + 1)"
             >
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -105,5 +116,7 @@
         </ul>
       </nav>
     </div>
+    <!-- pagination -->
   </div>
+  <!-- content -->
 </div>
