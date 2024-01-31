@@ -9,12 +9,15 @@ import { RequestModel } from '../models/request.model';
 })
 export class HomeComponent {
   response: any ;
+  categories: any = [];
   pageNumbers: number[] = [];
   request: RequestModel = new RequestModel();
+  searchCategory: string = "";
 
 
   constructor( private http: HttpClient ) {
     this.getAll();
+    this.getCategories();
   }
 
   getAll(pageNumber:number = 1){
@@ -27,6 +30,12 @@ export class HomeComponent {
     })
   }
 
+  getCategories(){
+    this.http
+    .get("http://localhost:5110/api/Categories/GetAll")
+    .subscribe(res => this.categories = res)
+  }
+
   setPageNumber(){
     this.pageNumbers = [];
     
@@ -35,7 +44,10 @@ export class HomeComponent {
     }
   }
 
-
+  changeCategory(categoryId: number | null = null){
+    this.request.categoryId = categoryId;
+    this.getAll(1);
+  }
 
 
 }
