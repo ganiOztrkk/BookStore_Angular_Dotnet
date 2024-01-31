@@ -6,10 +6,11 @@ namespace BookStoreServer.WebApi.Controllers;
 
 public sealed class ShoesController : BaseController
 {
-    private static readonly List<Shoe> _shoes = new();
+    private static List<Shoe> _shoes = new();
 
     public ShoesController()
     {
+        _shoes = new();
         _shoes.Add(new Shoe()
         {
             Id = 1,
@@ -75,6 +76,6 @@ public sealed class ShoesController : BaseController
                             .Take(pageSize)
                             .ToList();
 
-        return Ok(response.Data);
+        return Ok(response);
     }
 }
