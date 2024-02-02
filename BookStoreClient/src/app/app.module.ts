@@ -11,6 +11,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { CategoryPipe } from './pipes/category.pipe';
+import { CartAnimationDirective } from './directives/cart.animation.directive';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -22,13 +25,16 @@ export function HttpLoaderFactory(http: HttpClient){
     LayoutsComponent,
     HomeComponent,
     NavbarComponent,
-    CategoryPipe
+    CategoryPipe,
+    CartAnimationDirective,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SweetAlert2Module,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -20,6 +20,7 @@
     "@angular/router": "^17.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@sweetalert2/ngx-sweetalert2": "^12.2.0",
     "i": "^0.3.7",
     "npm": "^10.4.0",
     "rxjs": "~7.8.0",

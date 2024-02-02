@@ -1,4 +1,5 @@
 <div class="row mt-1">
+
   <!-- side bar -->
   <div class="col-sm-12 col-md-4 col-lg-3 col-12">
     <div class="card">
@@ -6,6 +7,7 @@
         <h3>{{ "categories" | translate }}</h3>
       </div>
       <div class="card-body">
+
         <!-- category search -->
         <div class="input-group mb-2">
           <span class="input-group-text" id="basic-addon-1">
@@ -22,21 +24,22 @@
 
         <!-- category list -->
         <ul class="categories">
-          <li 
-          (click)="changeCategory(null)"
-          [ngClass]="request.categoryId === null ? 'active': ''"
+          <li
+            (click)="changeCategory(null)"
+            [ngClass]="request.categoryId === null ? 'active' : ''"
           >
             {{ "allproducts" | translate }}
           </li>
-          <li 
-          (click)="changeCategory(item.id)"
-          *ngFor="let item of categories | category: searchCategory"
-          [ngClass]="request.categoryId === item.id ? 'active': ''"
+          <li
+            (click)="changeCategory(item.id)"
+            *ngFor="let item of categories | category : searchCategory"
+            [ngClass]="request.categoryId === item.id ? 'active' : ''"
           >
             {{ item.name }}
           </li>
         </ul>
         <!-- category list -->
+
       </div>
     </div>
   </div>
@@ -44,6 +47,7 @@
 
   <!-- content -->
   <div class="col-sm-12 col-md-8 col-lg-9 col-12">
+
     <!-- product search -->
     <div class="input-group mb-2">
       <span class="input-group-text" id="basic-addon-1">
@@ -78,10 +82,14 @@
           </div>
           <div class="card-footer text-center">
             <h5 class="card-text">{{ item.price }}₺</h5>
-            <a class="btn btn-dark w-100"
-              ><i class="fa-solid fa-cart-shopping"></i>
-              {{ "addchart" | translate }}</a
-            >
+            <a
+             class="btn btn-dark w-100"
+             (click)="addToCart(item)"
+             id="cart"
+             CartAnimation>
+             <i class="fa-solid fa-cart-shopping"></i>
+              {{ "addchart" | translate }}
+            </a>
           </div>
         </div>
       </div>
@@ -96,7 +104,7 @@
             <a
               class="page-link"
               aria-label="Previous"
-              (click)="getAll(response?.pageNumber - 1)"
+              (click)="getAll(response.pageNumber - 1)"
             >
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -105,7 +113,7 @@
           <li
             class="page-item"
             *ngFor="let item of pageNumbers"
-            [ngClass]="response?.pageNumber === item ? 'active' : ''"
+            [ngClass]="response.pageNumber === item ? 'active' : ''"
           >
             <a class="page-link" (click)="getAll(item)">{{ item }}</a>
           </li>
@@ -114,7 +122,7 @@
             <a
               class="page-link"
               aria-label="Next"
-              (click)="getAll(response?.pageNumber + 1)"
+              (click)="getAll(response.pageNumber + 1)"
             >
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -123,6 +131,7 @@
       </nav>
     </div>
     <!-- pagination -->
+
   </div>
   <!-- content -->
 </div>

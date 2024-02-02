@@ -12,5 +12,16 @@
     "cart": "Sepetim",
     "home": "Anasayfa",
     "addchart": "Sepete Ekle",
-    "allproducts": "Tüm Ürünler"
+    "allproducts": "Tüm Ürünler",
+    "addtobasketsuccess": "Ürün sepete eklendi :)",
+    "mycart": "Sepetim",
+    "checkout": "Sepeti Onayla",
+    "cartsummary": "Sipariş Özeti",
+    "subtotal": "Ürün Toplamı",
+    "shipping": "Kargo",
+    "discount": "İndirim",
+    "total": "Toplam",
+    "product": "Ürün",
+    "size": "Numara",
+    "quantity": "Adet"
 }

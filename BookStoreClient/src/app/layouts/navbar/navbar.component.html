@@ -20,10 +20,12 @@
       </ul>
       <div class="d-flex">
         <div>
-          <button class="btn btn-outline-light position-relative" type="submit">
+          <button
+          routerLink="shopping-cart"
+           class="btn btn-outline-light position-relative" type="submit">
             <i class="fa-solid fa-basket-shopping"></i>
-            <span *ngIf="count > 0" class="position-absolute top-100 start-0 translate-middle badge rounded-pill bg-danger">
-              {{count}}
+            <span *ngIf="shopping.count > 0" class="position-absolute top-100 start-0 translate-middle badge rounded-pill bg-danger">
+              {{shopping.count}}
             </span>
             {{ "cart" | translate }}
           </button>

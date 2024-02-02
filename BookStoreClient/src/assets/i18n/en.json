@@ -12,5 +12,16 @@
     "cart": "My Cart",
     "home": "Home",
     "addchart": "Add to Bag",
-    "allproducts": "All Products"
+    "allproducts": "All Products",
+    "addtobasketsuccess": "Product added to cart :)",
+    "mycart": "Shopping Bag",
+    "checkout": "Checkout",
+    "cartsummary": "Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "discount": "Discount",
+    "total": "Total",
+    "product": "Product",
+    "size": "Size",
+    "quantity": "Quantity"
 }
