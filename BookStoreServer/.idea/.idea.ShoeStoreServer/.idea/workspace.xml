@@ -9,37 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="695e66ab-0317-477d-a326-feb5c27d57ea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/layouts/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/layouts/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/layouts/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/layouts/navbar/navbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/BookStoreServer.WebApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/BookStoreServer.WebApi.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/Controllers/CategoriesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/Controllers/CategoriesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/Controllers/ShoesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/Controllers/ShoesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/Models/Shoe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/Models/Shoe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/Models/ShoeCategory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/Models/ShoeCategory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/BookStoreServer.WebApi.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/BookStoreServer.WebApi.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/BookStoreServer.WebApi.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/ref/BookStoreServer.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/ref/BookStoreServer.WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/refint/BookStoreServer.WebApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/Debug/net7.0/refint/BookStoreServer.WebApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/BookStoreServer.WebApi/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/services/shopping-cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/services/shopping-cart.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ShoeStoreServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShoeStoreServer/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +99,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706596655441</updated>
       <workItem from="1706596656737" duration="26019000" />
-      <workItem from="1706758829067" duration="17690000" />
+      <workItem from="1706758829067" duration="19843000" />
     </task>
     <servers />
   </component>

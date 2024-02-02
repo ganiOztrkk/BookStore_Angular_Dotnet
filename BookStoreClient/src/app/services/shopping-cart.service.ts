@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ShoeModel } from '../models/shoe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ShoppingCartService {
 
   count: number = 0;
-  shoppingCart: any[] = [];
+  shoppingCart: ShoeModel[] = [];
   
   constructor() {
     if (localStorage.getItem("shoppingCart")) {
