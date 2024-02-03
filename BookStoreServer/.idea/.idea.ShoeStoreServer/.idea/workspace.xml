@@ -9,9 +9,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="695e66ab-0317-477d-a326-feb5c27d57ea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/services/shopping-cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/services/shopping-cart.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../BookStoreClient/src/app/shopping-cart/shopping-cart.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ShoeStoreServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShoeStoreServer/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706596655441</updated>
       <workItem from="1706596656737" duration="26019000" />
-      <workItem from="1706758829067" duration="19843000" />
+      <workItem from="1706758829067" duration="21053000" />
     </task>
     <servers />
   </component>
