@@ -28,5 +28,20 @@
     "emptycart": "Sepetinde ürün bulunmamaktadır.",
     "suretodelete": "Silmek istiyor musun?",
     "yes": "Evet",
-    "cancel": "Vazgeç"
+    "cancel": "Vazgeç",
+    "buyer": "Alıcı",
+    "address": "Adres",
+    "creditcard": "Kredi Kartı",
+    "next": "Sonraki",
+    "confirm": "Onayla",
+    "payment": "Ödeme",
+    "name": "Ad",
+    "surname": "Soyad",
+    "identitynumber": "TC. Kimlik No",
+    "email": "Email",
+    "gsmnumber": "GSM Numarası",
+    "buyerinfo": "Müşteri Bilgileri",
+    "contactperson": "Teslim Alacak Kişi",
+    "city": "Şehir",
+    "zipcode": "Posta Kodu"
 }

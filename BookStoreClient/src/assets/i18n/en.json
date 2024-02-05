@@ -28,5 +28,21 @@
     "emptycart": "There are no products in your cart.",
     "suretodelete": "Do you want to delete?",
     "yes": "Yes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "buyer": "Buyer",
+    "address": "Address",
+    "creditcard": "Credit Card",
+    "next": "Next",
+    "confirm": "Confirm",
+    "payment": "Payment",
+    "name": "Name",
+    "surname": "Surname",
+    "identitynumber": "Identity Number",
+    "email": "Email",
+    "gsmnumber": "GSM Number",
+    "buyerinfo": "Customer Information",
+    "contactperson": "Contant",
+    "city": "City",
+    "zipcode": "Zip Code"
+
 }

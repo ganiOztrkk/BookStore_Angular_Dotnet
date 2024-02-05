@@ -5,19 +5,24 @@
   <div class="card-body d-flex justify-content-between">
     <div class="mt-1 d-flex align-items-center">
       <i style="font-size: 30px" class="fa-solid fa-cart-shopping me-4"></i>
-      <span style="font-size: 20px; font-weight: 500"
-        >{{"emptycart"|translate}}</span
-      >
+      <span style="font-size: 20px; font-weight: 500">{{
+        "emptycart" | translate
+      }}</span>
     </div>
     <div>
-      <button routerLink="" class="btn btn-dark">{{"goshopping"|translate}}</button>
+      <button routerLink="" class="btn btn-dark">
+        {{ "goshopping" | translate }}
+      </button>
     </div>
   </div>
 </div>
 
 <div *ngIf="shopping.count > 0" class="row mt-3">
   <div class="col-sm-12 col-md-8 col-lg-9 col-12">
-    <div *ngFor="let item of shopping.shoppingCart; let i = index" class="mt-2 card mb-4">
+    <div
+      *ngFor="let item of shopping.shoppingCart; let i = index"
+      class="mt-2 card mb-4"
+    >
       <div class="row">
         <div class="col-3">
           <div style="padding: 5px 5px">
@@ -73,7 +78,11 @@
             <span class="me-4" style="font-size: 25px; font-weight: 300">{{
               item.price | currency : "₺"
             }}</span>
-            <i (click)="shopping.removeByIndex(i)" style="font-size: 20px" class="fa-solid fa-trash"></i>
+            <i
+              (click)="shopping.removeByIndex(i)"
+              style="font-size: 20px"
+              class="fa-solid fa-trash"
+            ></i>
           </div>
         </div>
       </div>
@@ -83,7 +92,7 @@
   <div class="col-sm-12 col-md-4 col-lg-3 col-12">
     <button
       data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
+      data-bs-target="#paymentModal"
       style="font-size: 18px; font-weight: 600"
       class="mt-2 btn btn-dark text-center w-100"
     >
@@ -99,7 +108,7 @@
         <li class="d-flex justify-content-between">
           <div>{{ "subtotal" | translate }}</div>
           <span>
-            {{ shopping.subtotal| currency : "₺" }}
+            {{ shopping.subtotal | currency : "₺" }}
           </span>
         </li>
         <li class="d-flex justify-content-between">
@@ -123,7 +132,7 @@
     </div>
     <button
       data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
+      data-bs-target="#paymentModal"
       style="font-size: 18px; font-weight: 600"
       class="btn btn-dark text-center w-100"
     >
@@ -133,21 +142,154 @@
   </div>
 </div>
 
-
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="paymentModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="paymentModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Ödeme</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="paymentModalLabel">{{"payment"|translate}}</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        ...
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [ngClass]="selectedTab === 1 ? 'active' : ''"
+              (click)="changeTab(1)"
+            >
+              {{ "buyer" | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [ngClass]="selectedTab === 2 ? 'active' : ''"
+              (click)="changeTab(2)"
+            >
+              {{ "address" | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [ngClass]="selectedTab === 3 ? 'active' : ''"
+              (click)="changeTab(3)"
+            >
+              {{ "creditcard" | translate }}
+            </a>
+          </li>
+        </ul>
+
+        <!-- buyer -->
+        <div *ngIf="selectedTab ===1" class="mt-3">
+          <form #buyerForm autocomplete="off">
+            <div class="row mt-2">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="name">{{"name"|translate}}</label>
+                  <input type="text" name="buyerName" class="form-control" [(ngModel)]="request.buyer.name">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="surname">{{"surname"|translate}}</label>
+                  <input type="text" name="buyerSurname" class="form-control" [(ngModel)]="request.buyer.surname">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="email">{{"email"|translate}}</label>
+                  <input type="email" name="buyerEmail" class="form-control" [(ngModel)]="request.buyer.email">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="gsmNumber">{{"gsmnumber"|translate}}</label>
+                  <input type="text" name="buyergsmNumber" maxlength="11" class="form-control" placeholder="0 530 *** ** **" [(ngModel)]="request.buyer.surname">
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label for="identityNumber">{{"identitynumber"|translate}}</label>
+              <input type="text" name="buyeridentityNumber" maxlength="11" class="form-control" [(ngModel)]="request.buyer.identityNumber">
+            </div>
+          </form>
+        </div>
+
+        <!-- address -->
+        <div *ngIf="selectedTab ===2" class="mt-3">
+          <form shippingAddressForm="ngForm" autocomplete="off">
+            <div class="form-group">
+              <label for="contactName">{{"contactperson"|translate}}</label>
+              <input type="text" name="contactName" class="form-control" [(ngModel)]="request.shippingAddress.contactName">
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="city">{{"city"|translate}}</label>
+                  <select class="form-control" [(ngModel)]="request.shippingAddress.city" name="city">
+                    <option *ngFor="let item of cities" [value]="item">
+                      {{item}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="zipCode">{{"zipcode"|translate}}</label>
+                  <input type="text" class="form-control" [(ngModel)]="request.shippingAddress.zipCode" name="zipCode">
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <label for="address">{{"address"|translate}}</label>
+              <textarea [(ngModel)]="request.shippingAddress.address" name="address" rows="3" class="form-control" maxlength="250"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- credit card -->
+        <div *ngIf="selectedTab ===3">
+
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          {{ "cancel" | translate }}
+        </button>
+        <button
+          *ngIf="selectedTab < 3"
+          (click)="changeTab(selectedTab + 1)"
+          type="button"
+          class="btn btn-dark"
+        >
+          {{ "next" | translate }}
+        </button>
+        <button
+          *ngIf="selectedTab == 3"
+          (click)="payment()"
+          type="button"
+          class="btn btn-success"
+        >
+          {{ "confirm" | translate }}
+        </button>
       </div>
     </div>
   </div>

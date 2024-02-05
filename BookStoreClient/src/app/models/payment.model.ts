@@ -28,8 +28,8 @@ export class AddressModel {
     address: string = "";
     zipCode: string = "";
     contactName: string = "";
-    city: string = "";
-    country: string = "";
+    city: string = "İstanbul";
+    country: string = "Türkiye";
 }
 
 export class PaymentCardModel {
