@@ -2,21 +2,22 @@
   {{ "cart" | translate }} ({{ shopping.count }} {{ "product" | translate }})
 </h1>
 <div *ngIf="shopping.count === 0" class="card mt-3">
-    <div class="card-body d-flex justify-content-between">
-        <div class="mt-1 d-flex align-items-center">
-            <i style="font-size: 30px;"  class="fa-solid fa-cart-shopping me-4"></i>
-            <span style="font-size: 20px; font-weight: 500;">Sepetinde ürün bulunmamaktadır.</span>
-        </div>
-        <div>
-            <button routerLink="" class="btn btn-dark">Alışverişe Başla</button>
-        </div>
+  <div class="card-body d-flex justify-content-between">
+    <div class="mt-1 d-flex align-items-center">
+      <i style="font-size: 30px" class="fa-solid fa-cart-shopping me-4"></i>
+      <span style="font-size: 20px; font-weight: 500"
+        >{{"emptycart"|translate}}</span
+      >
     </div>
+    <div>
+      <button routerLink="" class="btn btn-dark">{{"goshopping"|translate}}</button>
+    </div>
+  </div>
 </div>
- 
 
 <div *ngIf="shopping.count > 0" class="row mt-3">
   <div class="col-sm-12 col-md-8 col-lg-9 col-12">
-    <div *ngFor="let item of shopping.shoppingCart" class="mt-2 card mb-4">
+    <div *ngFor="let item of shopping.shoppingCart; let i = index" class="mt-2 card mb-4">
       <div class="row">
         <div class="col-3">
           <div style="padding: 5px 5px">
@@ -32,10 +33,11 @@
         >
           <h4>{{ item.title }}</h4>
           <p>{{ item.description }}</p>
+
           <div class="d-flex align-items-center justify-content-center">
             <div class="form-group">
-              <label for="size">{{ "size" | translate }}</label>
-              <select class="form-control-sm ms-1 me-3" name="size" id="size">
+              <label>{{ "size" | translate }}</label>
+              <select class="form-control-sm ms-1 me-3">
                 <option value="38">38</option>
                 <option value="39">39</option>
                 <option value="40">40</option>
@@ -48,21 +50,22 @@
                 <option value="47">47</option>
               </select>
             </div>
-            <label for="quantity" class="me-1">{{
-              "quantity" | translate
-            }}</label>
-            <select class="form-control-sm" id="quantity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
+
+            <div class="form-group">
+              <label class="me-1">{{ "quantity" | translate }}</label>
+              <select class="form-control-sm">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="col-3 d-flex justify-content-center align-items-center">
@@ -70,7 +73,7 @@
             <span class="me-4" style="font-size: 25px; font-weight: 300">{{
               item.price | currency : "₺"
             }}</span>
-            <i style="font-size: 20px" class="fa-solid fa-trash"></i>
+            <i (click)="shopping.removeByIndex(i)" style="font-size: 20px" class="fa-solid fa-trash"></i>
           </div>
         </div>
       </div>
@@ -79,6 +82,8 @@
 
   <div class="col-sm-12 col-md-4 col-lg-3 col-12">
     <button
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
       style="font-size: 18px; font-weight: 600"
       class="mt-2 btn btn-dark text-center w-100"
     >
@@ -94,34 +99,56 @@
         <li class="d-flex justify-content-between">
           <div>{{ "subtotal" | translate }}</div>
           <span>
-            {{ subtotal | currency : "₺" }}
+            {{ shopping.subtotal| currency : "₺" }}
           </span>
         </li>
         <li class="d-flex justify-content-between">
           <div>{{ "shipping" | translate }}</div>
           <span>
-            {{ shipping | currency : "₺" }}
+            {{ shopping.shipping | currency : "₺" }}
           </span>
         </li>
         <li class="d-flex justify-content-between" name="discount">
           <div>{{ "discount" | translate }}</div>
           <span>
-            {{ discount | currency : "₺" }}
+            {{ shopping.discount | currency : "₺" }}
           </span>
         </li>
       </ul>
       <hr />
       <h5 name="total" class="text-end">
         <span class="me-4">{{ "total" | translate }}</span>
-        {{ total | currency : "₺" }}
+        {{ shopping.total | currency : "₺" }}
       </h5>
     </div>
     <button
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
       style="font-size: 18px; font-weight: 600"
       class="btn btn-dark text-center w-100"
     >
       {{ "checkout" | translate }}
       <i class="fa-solid fa-chevron-right"></i>
     </button>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Ödeme</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
   </div>
 </div>

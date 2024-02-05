@@ -35,7 +35,7 @@
             *ngFor="let item of categories | category : searchCategory"
             [ngClass]="request.categoryId === item.id ? 'active' : ''"
           >
-            {{ item.name }}
+            {{ item.name | translate  }}
           </li>
         </ul>
         <!-- category list -->

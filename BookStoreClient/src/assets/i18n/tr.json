@@ -1,13 +1,13 @@
 {
     "categories": "Kategoriler",
-    "lifestyle": "Günlük Giyim",
-    "jordan": "Jordan",
-    "running": "Koşu",
-    "basketball": "Basketbol",
-    "football": "Futbol",
-    "training": "Antreman",
-    "tennis": "Tenis",
-    "walking": "Yürüyüş",
+    "Lifestyle": "Günlük Giyim",
+    "Jordan": "Jordan",
+    "Running": "Koşu",
+    "Basketball": "Basketbol",
+    "Football": "Futbol",
+    "Training": "Antreman",
+    "Tennis": "Tenis",
+    "Walking": "Yürüyüş",
     "search": "Aranacak bir şey yazın...",
     "cart": "Sepetim",
     "home": "Anasayfa",
@@ -23,5 +23,10 @@
     "total": "Toplam",
     "product": "Ürün",
     "size": "Numara",
-    "quantity": "Adet"
+    "quantity": "Adet",
+    "goshopping": "Alışverişe Başla :)",
+    "emptycart": "Sepetinde ürün bulunmamaktadır.",
+    "suretodelete": "Silmek istiyor musun?",
+    "yes": "Evet",
+    "cancel": "Vazgeç"
 }

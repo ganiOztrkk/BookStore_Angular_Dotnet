@@ -4,7 +4,7 @@ using BookStoreServer.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace BookStoreServer.WebApi.Controllers;
 
-public class CategoriesController : BaseController
+public sealed class CategoriesController : BaseController
 {
     [HttpGet]
     public IActionResult GetAll()

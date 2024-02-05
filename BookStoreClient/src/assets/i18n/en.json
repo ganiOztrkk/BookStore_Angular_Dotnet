@@ -1,13 +1,13 @@
 {
     "categories": "Categories",
-    "lifestyle": "Life Style",
-    "jordan": "Jordan",
-    "running": "Running",
-    "basketball": "Basketball",
-    "football": "Football",
-    "training": "Training",
-    "tennis": "Tennis",
-    "walking": "Walking",
+    "Lifestyle": "Life Style",
+    "Jordan": "Jordan",
+    "Running": "Running",
+    "Basketball": "Basketball",
+    "Football": "Football",
+    "Training": "Training",
+    "Tennis": "Tennis",
+    "Walking": "Walking",
     "search": "Type something to search...",
     "cart": "My Cart",
     "home": "Home",
@@ -23,5 +23,10 @@
     "total": "Total",
     "product": "Product",
     "size": "Size",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "goshopping": "Start Shopping :)",
+    "emptycart": "There are no products in your cart.",
+    "suretodelete": "Do you want to delete?",
+    "yes": "Yes",
+    "cancel": "Cancel"
 }

@@ -18,6 +18,23 @@ export class SwalService {
     });
     Toast.fire(title, '', icon);
   }
+
+  callSwal(title: string, cancelBtnText: string, confirmBtnText: string, callBack: () => void){
+    Swal.fire({
+      title: title,
+      icon: "question",
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: cancelBtnText,
+      confirmButtonText: confirmBtnText,
+      confirmButtonColor: "red"
+    }).then(res => {
+      if (res.isConfirmed) {
+        callBack();
+      }
+    })
+  }
+
 }
 
 type SweetAlertIcon = 'success' | 'error' | 'warning' | 'info' | 'question'

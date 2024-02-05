@@ -14,6 +14,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Shoe> Shoes { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<ShoeCategory> ShoeCategories { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,5 +24,6 @@ public sealed class AppDbContext : DbContext
             x.ShoeId, x.CategoryId
         });
         modelBuilder.Entity<Shoe>().Property(x => x.Price).HasColumnType("money");
+        modelBuilder.Entity<Order>().Property(x => x.Price).HasColumnType("money");
     }
 }
