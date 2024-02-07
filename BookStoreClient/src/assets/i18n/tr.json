@@ -43,5 +43,15 @@
     "buyerinfo": "Müşteri Bilgileri",
     "contactperson": "Teslim Alacak Kişi",
     "city": "Şehir",
-    "zipcode": "Posta Kodu"
+    "zipcode": "Posta Kodu",
+    "shippingaddress": "Teslimat Adresi",
+    "invoinceaddress": "Fatura Adresi",
+    "shippinginfo": "Teslimat Bilgileri",
+    "invoiceinfo": "Fatura Bilgileri",
+    "usesameaddress": "Fatura adresim, teslimat adresim ile aynı olsun.",
+    "cardholder": "Kart Sahibi",
+    "cardnumber": "Kredi Kartı Numarası",
+    "expiredate": "Son Kullanım Tarihi",
+    "month": "Ay",
+    "year": "Yıl"
 }

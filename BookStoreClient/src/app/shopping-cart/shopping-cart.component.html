@@ -195,18 +195,18 @@
         </ul>
 
         <!-- buyer -->
-        <div *ngIf="selectedTab ===1" class="mt-3">
-          <form #buyerForm autocomplete="off">
+        <div *ngIf="selectedTab ===1" class="mt-3 d-flex flex-column justify-content-center">
+          <form buyerForm="ngForm" autocomplete="off">
             <div class="row mt-2">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="name">{{"name"|translate}}</label>
+                  <label>{{"name"|translate}}</label>
                   <input type="text" name="buyerName" class="form-control" [(ngModel)]="request.buyer.name">
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
-                  <label for="surname">{{"surname"|translate}}</label>
+                  <label>{{"surname"|translate}}</label>
                   <input type="text" name="buyerSurname" class="form-control" [(ngModel)]="request.buyer.surname">
                 </div>
               </div>
@@ -214,35 +214,36 @@
             <div class="row mt-2">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="email">{{"email"|translate}}</label>
+                  <label>{{"email"|translate}}</label>
                   <input type="email" name="buyerEmail" class="form-control" [(ngModel)]="request.buyer.email">
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
-                  <label for="gsmNumber">{{"gsmnumber"|translate}}</label>
-                  <input type="text" name="buyergsmNumber" maxlength="11" class="form-control" placeholder="0 530 *** ** **" [(ngModel)]="request.buyer.surname">
+                  <label>{{"gsmnumber"|translate}}</label>
+                  <input type="text" name="buyerGsmNumber" maxlength="11" class="form-control" placeholder="0 530 *** ** **" [(ngModel)]="request.buyer.gsmNumber">
                 </div>
               </div>
             </div>
             <div class="form-group mt-2">
-              <label for="identityNumber">{{"identitynumber"|translate}}</label>
-              <input type="text" name="buyeridentityNumber" maxlength="11" class="form-control" [(ngModel)]="request.buyer.identityNumber">
+              <label>{{"identitynumber"|translate}}</label>
+              <input type="text" name="buyerIdentityNumber" maxlength="11" class="form-control" [(ngModel)]="request.buyer.identityNumber">
             </div>
           </form>
         </div>
 
-        <!-- address -->
+        <!-- addresses -->
         <div *ngIf="selectedTab ===2" class="mt-3">
+          <h4 class="text-center" style="font-weight: 300;">{{"shippinginfo"|translate}}</h4>
           <form shippingAddressForm="ngForm" autocomplete="off">
             <div class="form-group">
-              <label for="contactName">{{"contactperson"|translate}}</label>
+              <label >{{"contactperson"|translate}}</label>
               <input type="text" name="contactName" class="form-control" [(ngModel)]="request.shippingAddress.contactName">
             </div>
             <div class="row mt-3">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="city">{{"city"|translate}}</label>
+                  <label >{{"city"|translate}}</label>
                   <select class="form-control" [(ngModel)]="request.shippingAddress.city" name="city">
                     <option *ngFor="let item of cities" [value]="item">
                       {{item}}
@@ -252,21 +253,122 @@
               </div>
               <div class="col-6">
                 <div class="form-group">
-                  <label for="zipCode">{{"zipcode"|translate}}</label>
+                  <label >{{"zipcode"|translate}}</label>
                   <input type="text" class="form-control" [(ngModel)]="request.shippingAddress.zipCode" name="zipCode">
                 </div>
               </div>
             </div>
             <div class="form-group mt-3">
-              <label for="address">{{"address"|translate}}</label>
-              <textarea [(ngModel)]="request.shippingAddress.address" name="address" rows="3" class="form-control" maxlength="250"></textarea>
+              <label >{{"shippingaddress"|translate}}</label>
+              <textarea [(ngModel)]="request.shippingAddress.description" name="address" rows="3" class="form-control" maxlength="250"></textarea>
             </div>
           </form>
+
+          <!-- billing address -->
+          <form *ngIf="isSameAddress===false" billingAddressForm="ngForm" autocomplete="off">
+            <h4 class="text-center mt-2" style="font-weight: 300;">{{"invoiceinfo"|translate}}</h4>
+            <div class="form-group">
+              <label >{{"contactperson"|translate}}</label>
+              <input type="text" name="billingContactName" class="form-control" [(ngModel)]="request.billingAddress.contactName">
+            </div>
+            <div class="row mt-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <label >{{"city"|translate}}</label>
+                  <select class="form-control" [(ngModel)]="request.billingAddress.city" name="billingCity">
+                    <option *ngFor="let item of cities" [value]="item">
+                      {{item}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label >{{"zipcode"|translate}}</label>
+                  <input type="text" class="form-control" [(ngModel)]="request.billingAddress.zipCode" name="billingZipCode">
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <label >{{"invoinceaddress"|translate}}</label>
+              <textarea [(ngModel)]="request.billingAddress.description" name="billingAddress" rows="3" class="form-control" maxlength="250"></textarea>
+            </div>
+          </form>
+
+          <div class="form-check form-switch">
+            <input type="checkbox" 
+            class="form-check-input" 
+            role="switch" name="isSameAddress" 
+            [(ngModel)]="isSameAddress" 
+            (change)="changeIsSameAddress()">
+            
+            <label for="isSameAddress" class="form-check-label">
+              {{"usesameaddress"|translate}}
+            </label>
+          </div>
+
         </div>
 
+         
         <!-- credit card -->
         <div *ngIf="selectedTab ===3">
-
+          <form creditCardForm="ngForm" class="mt-3" autocomplete="off">
+            <div class="form-group">
+              <label>{{"cardholder"|translate}}</label>
+              <input id="cardHolderName" type="text" class="form-control" name="cardHolderName" [(ngModel)]="request.paymentCard.cardHolderName">
+            </div> 
+            <div class="form-group mt-3">
+              <label>{{"cardnumber"|translate}}</label>
+              <div class="row">
+                <div class="col-2">
+                  <input type="text" [maxlength]="4" class="form-control" name="cardNumber1" [(ngModel)]="cardNumber1" (keypress)="onKeyPress($event)">
+                </div>
+                <div class="col-2">
+                  <input type="text" [maxlength]="4" class="form-control" name="cardNumber2" [(ngModel)]="cardNumber2" (keypress)="onKeyPress($event)">
+                </div>
+                <div class="col-2">
+                  <input type="text" [maxlength]="4" class="form-control" name="cardNumber3" [(ngModel)]="cardNumber3" (keypress)="onKeyPress($event)">
+                </div>
+                <div class="col-2">
+                  <input type="text" [maxlength]="4" class="form-control" name="cardNumber4" [(ngModel)]="cardNumber4" (keypress)="onKeyPress($event)">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 text-center">
+              <div class="col-2">
+                <div class="form-group">
+                  <label>
+                    {{"month"|translate}}
+                  </label>
+                  <select class="form-control text-center" [(ngModel)]="request.paymentCard.expireMonth" id="expireMonth" name="expireMonth">
+                    <option *ngFor="let item of months" [value]="item">
+                      {{item}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label>
+                    {{"year"|translate}}
+                  </label>
+                  <select class="form-control text-center" [(ngModel)]="request.paymentCard.expireYear" id="expireYear" name="expireYear">
+                    <option *ngFor="let item of years" [value]="item">
+                      {{item}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label>
+                    CVC
+                  </label>
+                  <input type="text" [maxlength]="3" (keypress)="onKeyPress($event)" id="cvc" name="cvc" class="form-control text-center" [(ngModel)]="request.paymentCard.cvc">
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
 
       </div>

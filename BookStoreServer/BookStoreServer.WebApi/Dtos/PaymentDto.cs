@@ -7,6 +7,6 @@ public sealed record PaymentDto(
     List<Shoe> Shoes,
     Buyer Buyer,
     Address ShippingAddress,
-    Address BillingingAddress,
+    Address BillingAddress,
     PaymentCard PaymentCard
     );

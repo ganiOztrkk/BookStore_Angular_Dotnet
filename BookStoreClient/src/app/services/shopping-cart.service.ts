@@ -3,6 +3,7 @@ import { ShoeModel } from '../models/shoe.model';
 import { SwalService } from './swal.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { PaymentModel } from '../models/payment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -79,15 +80,11 @@ export class ShoppingCartService {
     });
   }
 
-  payment(){
+  payment(data: PaymentModel, callBack: (res: any) => void){
     this.http
-    .post("http://localhost:5110/api/ShoppingCarts/Payment", {shoes: this.shoppingCart})
+    .post("https://localhost:7048/api/ShoppingCarts/Payment", data)
     .subscribe(res => {
-      //dolacak
+      callBack(res);
     })
-
   }
-
-    
-  
 }

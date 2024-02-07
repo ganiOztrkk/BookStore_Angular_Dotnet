@@ -43,6 +43,16 @@
     "buyerinfo": "Customer Information",
     "contactperson": "Contant",
     "city": "City",
-    "zipcode": "Zip Code"
+    "zipcode": "Zip Code",
+    "shippingaddress": "Delivery Address",
+    "invoinceaddress": "Invoice Address",
+    "shippinginfo": "Shipping Information",
+    "invoiceinfo": "Invoice Information",
+    "usesameaddress": "Billing address is the same as my delivery address.",
+    "cardholder": "Card Holder",
+    "cardnumber": "Credit Card Number",
+    "expiredate": "Expire Date",
+    "month": "Month",
+    "year": "Year"
 
 }

@@ -14,7 +14,6 @@ public sealed class ShoppingCartsController : BaseController
     public IActionResult Payment(PaymentDto paymentDto)
     {
         decimal totalPrice = 0;
-        decimal comission = 0.1m;
         paymentDto.Shoes.ForEach(x =>
         {
             totalPrice += x.Price;
@@ -29,7 +28,7 @@ public sealed class ShoppingCartsController : BaseController
         request.Locale = Locale.TR.ToString();
         request.ConversationId = Guid.NewGuid().ToString();
         request.Price = totalPrice.ToString();
-        request.PaidPrice = (totalPrice * (1 * comission)).ToString();
+        request.PaidPrice = totalPrice.ToString();
         request.Currency = Currency.TRY.ToString();
         request.Installment = 1;
         request.BasketId = Order.GetNewOrderNumber();
@@ -43,13 +42,15 @@ public sealed class ShoppingCartsController : BaseController
         request.Buyer = buyer;
         
         request.ShippingAddress = paymentDto.ShippingAddress;
-        request.BillingAddress = paymentDto.BillingingAddress;
+        request.BillingAddress = paymentDto.BillingAddress;
 
         List<BasketItem> basketItems = new List<BasketItem>();
         paymentDto.Shoes.ForEach(x =>
         {
             BasketItem item = new BasketItem();
             item.Id = x.Id.ToString();
+            item.Category1 = "";
+            item.Category2 = "";
             item.Name = x.Title;
             item.ItemType = BasketItemType.PHYSICAL.ToString();
             item.Price = x.Price.ToString();
@@ -61,20 +62,20 @@ public sealed class ShoppingCartsController : BaseController
         if (payment.Status =="success")
         {
             List<Order> orders = new();
-            foreach (var item in paymentDto.Shoes)
+            paymentDto.Shoes.ForEach(x =>
             {
                 var order = new Order
                 {
                     OrderNumber = request.BasketId,
-                    ShoeId = item.Id,
-                    Price = item.Price,
+                    ShoeId = x.Id,
+                    Price = x.Price,
                     PaymentDate = DateTime.Now,
                     PaymentType = "Credit Card",
                     PaymentNumber = payment.PaymentId
                 };
                 orders.Add(order);
-            }
-
+            });
+                
             var context = new AppDbContext();
             context.Orders.AddRange(orders);
             context.SaveChanges();

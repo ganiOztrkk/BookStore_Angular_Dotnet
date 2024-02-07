@@ -1,7 +1,7 @@
 import { ShoeModel } from "./shoe.model";
 
 export class PaymentModel{
-    shoes: ShoeModel[] = []
+    shoes: ShoeModel[] = [];
     buyer: BuyerModel = new BuyerModel();
     shippingAddress: AddressModel = new AddressModel();
     billingAddress: AddressModel = new AddressModel();
@@ -10,11 +10,11 @@ export class PaymentModel{
 
 export class BuyerModel {
     id: string = "";
-    name: string = "";
-    surname: string = "";
-    identityNumber: string = "";
-    email: string = "";
-    gsmNumber: string = "";
+    name: string = "Gani";
+    surname: string = "Öztürk";
+    identityNumber: string = "47756242424";
+    email: string = "gani@gmail.com";
+    gsmNumber: string = "05309338459";
     registrationDate: string = "";
     lastLoginDate: string = "";
     registrationAddress: string = "";
@@ -25,17 +25,17 @@ export class BuyerModel {
 }
 
 export class AddressModel {
-    address: string = "";
-    zipCode: string = "";
-    contactName: string = "";
-    city: string = "İstanbul";
+    description: string = "çerkezköy";
+    zipCode: string = "54444";
+    contactName: string = "Gani Öztürk";
+    city: string = "Tekirdağ";
     country: string = "Türkiye";
 }
 
 export class PaymentCardModel {
-    cardHolderName: string = "";
+    cardHolderName: string = "Gani Öztürk";
     cardNumber: string = "";
-    expireYear: string = "";
-    expireMonth: string = "";
-    cvc: string = "";
+    expireYear: string = "2027";
+    expireMonth: string = "12";
+    cvc: string = "322";
 }
