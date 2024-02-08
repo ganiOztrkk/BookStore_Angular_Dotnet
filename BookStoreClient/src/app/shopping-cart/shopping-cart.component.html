@@ -137,7 +137,7 @@
       data-bs-toggle="modal"
       data-bs-target="#paymentModal"
       style="font-size: 18px; font-weight: 600"
-      class="btn btn-dark text-center w-100"
+      class="btn btn-dark text-center w-100  mb-3"
     >
       {{ "checkout" | translate }}
       <i class="fa-solid fa-chevron-right"></i>
@@ -324,22 +324,22 @@
             <div class="form-group mt-3">
               <label>{{"cardnumber"|translate}}</label>
               <div class="row">
-                <div class="col-2">
+                <div class="col-md-3 col-lg-2 col-sm-6">
                   <input type="text" [maxlength]="4" class="form-control" name="cardNumber1" [(ngModel)]="cardNumber1" (keypress)="onKeyPress($event)">
                 </div>
-                <div class="col-2">
+                <div class="col-md-3 col-lg-2 col-sm-6">
                   <input type="text" [maxlength]="4" class="form-control" name="cardNumber2" [(ngModel)]="cardNumber2" (keypress)="onKeyPress($event)">
                 </div>
-                <div class="col-2">
+                <div class="col-md-3 col-lg-2 col-sm-6">
                   <input type="text" [maxlength]="4" class="form-control" name="cardNumber3" [(ngModel)]="cardNumber3" (keypress)="onKeyPress($event)">
                 </div>
-                <div class="col-2">
+                <div class="col-md-3 col-lg-2 col-sm-6">
                   <input type="text" [maxlength]="4" class="form-control" name="cardNumber4" [(ngModel)]="cardNumber4" (keypress)="onKeyPress($event)">
                 </div>
               </div>
             </div>
             <div class="row mt-3 text-center">
-              <div class="col-2">
+              <div class="col-lg-2 col-md-3 col-sm-4">
                 <div class="form-group">
                   <label>
                     {{"month"|translate}}
@@ -351,7 +351,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-2">
+              <div class="col-lg-2 col-md-3 col-sm-4">
                 <div class="form-group">
                   <label>
                     {{"year"|translate}}
@@ -363,7 +363,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-2">
+              <div class="col-lg-2 col-md-3 col-sm-4">
                 <div class="form-group">
                   <label>
                     CVC
