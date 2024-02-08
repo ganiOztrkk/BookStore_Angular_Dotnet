@@ -13,7 +13,7 @@ export class BuyerModel {
     name: string = "Gani";
     surname: string = "Öztürk";
     identityNumber: string = "47756242424";
-    email: string = "gani@gmail.com";
+    email: string = "ganiozturk.info@gmail.com";
     gsmNumber: string = "05309338459";
     registrationDate: string = "";
     lastLoginDate: string = "";

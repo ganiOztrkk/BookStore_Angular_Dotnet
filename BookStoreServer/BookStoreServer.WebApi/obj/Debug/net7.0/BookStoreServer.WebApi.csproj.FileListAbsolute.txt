@@ -254,3 +254,9 @@
 /Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
 /Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/Iyzipay.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/GenericEmailService.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/MailKit.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/MimeKit.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
+/Users/gani/Desktop/Github/BookStore/BookStoreServer/BookStoreServer.WebApi/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll

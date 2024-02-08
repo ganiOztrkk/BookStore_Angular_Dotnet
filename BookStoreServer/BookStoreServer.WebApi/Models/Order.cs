@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using BookStoreServer.WebApi.Context;
 
 namespace BookStoreServer.WebApi.Models;
 
@@ -18,6 +19,32 @@ public sealed class Order
 
     public static string GetNewOrderNumber()
     {
-        return Guid.NewGuid().ToString();
+        const string initialLetter = "AYT"; // firma imzası 
+        var year = DateTime.Now.Year.ToString(); // fatura yılı
+        var orderNumber = initialLetter + year;
+    
+        var context = new AppDbContext();
+        var lastOrder = context.Orders.OrderByDescending(x => x.Id).FirstOrDefault();
+        if (lastOrder is not null)
+        {
+            var lastOrderYear = lastOrder.CreatedAt.Year;
+            // Yeni yıla geçildiğinde sipariş numarasını sıfırlarız
+            if (lastOrderYear < DateTime.Now.Year)
+            {
+                orderNumber += "000000001";
+            }
+            else
+            {
+                var orderNumberInt = int.Parse(lastOrder.OrderNumber.Substring(7));
+                orderNumberInt++;
+                orderNumber += orderNumberInt.ToString("D9");
+            }
+        }
+        else
+        {
+            orderNumber += "000000001";
+        }
+        return orderNumber;
     }
+    
 }

@@ -84,6 +84,31 @@ namespace BookStoreServer.WebApi.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("BookStoreServer.WebApi.Models.OrderStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StatusDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id", "OrderNumber");
+
+                    b.ToTable("OrderStatus");
+                });
+
             modelBuilder.Entity("BookStoreServer.WebApi.Models.Shoe", b =>
                 {
                     b.Property<int>("Id")

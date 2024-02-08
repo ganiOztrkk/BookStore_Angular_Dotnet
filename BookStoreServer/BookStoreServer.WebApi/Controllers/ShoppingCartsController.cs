@@ -1,6 +1,8 @@
 using BookStoreServer.WebApi.Context;
 using BookStoreServer.WebApi.Dtos;
+using BookStoreServer.WebApi.Enums;
 using BookStoreServer.WebApi.Models;
+using BookStoreServer.WebApi.Services;
 using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
@@ -14,13 +16,10 @@ public sealed class ShoppingCartsController : BaseController
     public IActionResult Payment(PaymentDto paymentDto)
     {
         decimal totalPrice = 0;
-        paymentDto.Shoes.ForEach(x =>
-        {
-            totalPrice += x.Price;
-        });
+        paymentDto.Shoes.ForEach(x => { totalPrice += x.Price; });
         decimal comission = totalPrice * 1.1m;
 
-        Options options = new Options();
+        Iyzipay.Options options = new Iyzipay.Options();
         options.ApiKey = "sandbox-Hdm019F0rFt1NFv7IOeJ0Zh9pnOlSw5Q";
         options.SecretKey = "sandbox-0o6HUYwPP8CgqxY5zQABKldQ7vPP4CWX";
         options.BaseUrl = "https://sandbox-api.iyzipay.com";
@@ -44,7 +43,7 @@ public sealed class ShoppingCartsController : BaseController
 
         request.ShippingAddress = paymentDto.ShippingAddress;
         request.BillingAddress = paymentDto.BillingAddress;
-        
+
         List<BasketItem> basketItems = new List<BasketItem>();
         paymentDto.Shoes.ForEach(x =>
         {
@@ -63,24 +62,74 @@ public sealed class ShoppingCartsController : BaseController
         Payment payment = Iyzipay.Model.Payment.Create(request, options);
         if (payment.Status == "success")
         {
+            var orderNumber = Order.GetNewOrderNumber();
             List<Order> orders = new();
             paymentDto.Shoes.ForEach(x =>
             {
                 var order = new Order
                 {
-                    OrderNumber = request.BasketId,
+                    OrderNumber = orderNumber,
                     ShoeId = x.Id,
                     Price = x.Price,
                     PaymentDate = DateTime.Now,
                     PaymentType = "Credit Card",
-                    PaymentNumber = payment.PaymentId
+                    PaymentNumber = payment.PaymentId,
+                    CreatedAt = DateTime.Now
                 };
                 orders.Add(order);
             });
-
+            var orderStatus = new OrderStatus()
+            {
+                OrderNumber = orderNumber,
+                Status = OrderStatusEnum.PendingApproval,
+                StatusDate = DateTime.Now
+            };
             var context = new AppDbContext();
+            context.OrderStatus.Add(orderStatus);
             context.Orders.AddRange(orders);
             context.SaveChanges();
+
+            var successMailSubject = "Satın Alma Bilgilendirme";
+            var successMailBody = $@"
+            <p>Sayın {paymentDto.Buyer.Name} {paymentDto.Buyer.Surname},</p>
+            <p>Siparişiniz için teşekkür ederiz! JustKicks Store olarak, bizimle alışveriş yapmayı tercih ettiğiniz için memnuniyet duyuyoruz.</p>
+    
+            <h3>Sipariş Detayları:</h3>
+            <ul>
+                <li><strong>Sipariş Numarası:</strong> {orderNumber}</li>
+                <li><strong>Sipariş Tarihi:</strong> {orders[0].PaymentDate.ToShortDateString()}</li>
+                <li><strong>Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
+            </ul>
+
+            <h3>Teslimat Bilgileri:</h3>
+            <ul>
+                <li><strong>Alıcı Adı:</strong> {paymentDto.ShippingAddress.ContactName}</li>
+                <li><strong>Teslimat Adresi:</strong> {paymentDto.ShippingAddress.Description}</li>
+                <li><strong>Tahmini Teslimat Tarihi:</strong> {orders[0].PaymentDate.AddDays(3).ToShortDateString()}</li>
+            </ul>
+
+            <h3>Ödeme Bilgileri:</h3>
+            <ul>
+                <li><strong>Toplam Tutar:</strong> {request.Price}</li>
+                <li><strong>Ödenen Tutar:</strong> {request.PaidPrice}</li>
+                <li><strong>Kullanılan Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
+            </ul>
+
+            <h3>İletişim Bilgileri:</h3>
+            <p>Siparişinizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen çekinmeden bizimle iletişime geçin. Müşteri hizmetleri ekibimiz her zaman yardımcı olmaktan mutluluk duyacaktır.</p>
+            <p>Telefon: +90 530 999 99 99</p>
+            
+            <p>İlginiz ve güveniniz için tekrar teşekkür ederiz.</p>
+            <p>Saygılarımla,</p>
+            <p>Gani Ozturk<br>
+            Müşteri Hizmetleri Departmanı<br>
+            JustKicks Store<br>
+            Tekirdag / Cerkezkoy<br>
+            Tel: +90 530 999 99 99<br>
+            Web: <a href=""www.justkicks.com"">www.justkicks.com</a></p>
+            ";
+            var mailResponse = MailService.SendEmailAsync(paymentDto.Buyer.Email, successMailSubject, successMailBody);
+
             return NoContent();
         }
         else
