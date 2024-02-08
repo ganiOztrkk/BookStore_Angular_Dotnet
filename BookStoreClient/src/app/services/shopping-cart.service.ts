@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { ShoeModel } from '../models/shoe.model';
 import { SwalService } from './swal.service';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { PaymentModel } from '../models/payment.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +20,20 @@ export class ShoppingCartService {
   constructor(
     private swal: SwalService,
     private translate: TranslateService,
-    private http: HttpClient
+    private http: HttpClient,
+    private spinner: NgxSpinnerService
   ) {
+    this.checkLocalStoreForShoppingCart();
+  }
+
+  checkLocalStoreForShoppingCart(){
     if (localStorage.getItem("shoppingCart")) {
       const cart : string | null = localStorage.getItem("shoppingCart");
       if (cart !== null) {
         this.shoppingCart = JSON.parse(cart);
-        this.count = this.shoppingCart.length;
       }
     }
+    this.calculateOrder();
   }
 
    //#region priceCalculation
@@ -35,13 +41,17 @@ export class ShoppingCartService {
    calculateShipping(chartCount: number){
     if (chartCount > 2) {
       this.shipping = 0;
+    }else{
+      this.shipping = 35;
     }
   }
 
   calculateDiscount(subtotal: number){
     if (subtotal > 5000) {
       this.discount = -0.10 * subtotal;
-    }
+    }else {
+      this.discount = 0;
+  }
   }
 
   calculateSubtotal(shoppingCart: ShoeModel[]){
@@ -60,6 +70,7 @@ export class ShoppingCartService {
     this.calculateShipping(this.count);
     this.calculateDiscount(this.subtotal);
     this.calculateTotal(this.subtotal, this.shipping, this.discount);
+    this.count = this.shoppingCart.length;
   }
 
   //#endregion
@@ -81,10 +92,17 @@ export class ShoppingCartService {
   }
 
   payment(data: PaymentModel, callBack: (res: any) => void){
+    this.spinner.show();
     this.http
     .post("https://localhost:7048/api/ShoppingCarts/Payment", data)
-    .subscribe(res => {
-      callBack(res);
+    .subscribe({
+      next: (res) => {
+        callBack(res);
+        this.spinner.hide();
+      },
+      error: (err:HttpErrorResponse) => {
+        console.log(err);
+      }
     })
   }
 }

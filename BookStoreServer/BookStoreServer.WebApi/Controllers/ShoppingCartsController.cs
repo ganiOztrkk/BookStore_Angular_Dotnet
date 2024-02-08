@@ -18,7 +18,8 @@ public sealed class ShoppingCartsController : BaseController
         {
             totalPrice += x.Price;
         });
-        
+        decimal comission = totalPrice * 1.1m;
+
         Options options = new Options();
         options.ApiKey = "sandbox-Hdm019F0rFt1NFv7IOeJ0Zh9pnOlSw5Q";
         options.SecretKey = "sandbox-0o6HUYwPP8CgqxY5zQABKldQ7vPP4CWX";
@@ -27,8 +28,8 @@ public sealed class ShoppingCartsController : BaseController
         CreatePaymentRequest request = new CreatePaymentRequest();
         request.Locale = Locale.TR.ToString();
         request.ConversationId = Guid.NewGuid().ToString();
-        request.Price = totalPrice.ToString();
-        request.PaidPrice = totalPrice.ToString();
+        request.Price = totalPrice.ToString().Replace(",", ".");
+        request.PaidPrice = comission.ToString().Replace(",", ".");
         request.Currency = Currency.TRY.ToString();
         request.Installment = 1;
         request.BasketId = Order.GetNewOrderNumber();
@@ -40,26 +41,27 @@ public sealed class ShoppingCartsController : BaseController
         Buyer buyer = paymentDto.Buyer;
         buyer.Id = Guid.NewGuid().ToString();
         request.Buyer = buyer;
-        
+
         request.ShippingAddress = paymentDto.ShippingAddress;
         request.BillingAddress = paymentDto.BillingAddress;
-
+        
         List<BasketItem> basketItems = new List<BasketItem>();
         paymentDto.Shoes.ForEach(x =>
         {
             BasketItem item = new BasketItem();
             item.Id = x.Id.ToString();
-            item.Category1 = "";
-            item.Category2 = "";
+            item.Category1 = "Shoe";
+            item.Category2 = "Shoe";
             item.Name = x.Title;
             item.ItemType = BasketItemType.PHYSICAL.ToString();
-            item.Price = x.Price.ToString();
+            item.Price = x.Price.ToString().Replace(",", ".");
             basketItems.Add(item);
         });
+
         request.BasketItems = basketItems;
 
-        Payment payment =  Iyzipay.Model.Payment.Create(request, options);
-        if (payment.Status =="success")
+        Payment payment = Iyzipay.Model.Payment.Create(request, options);
+        if (payment.Status == "success")
         {
             List<Order> orders = new();
             paymentDto.Shoes.ForEach(x =>
@@ -75,7 +77,7 @@ public sealed class ShoppingCartsController : BaseController
                 };
                 orders.Add(order);
             });
-                
+
             var context = new AppDbContext();
             context.Orders.AddRange(orders);
             context.SaveChanges();
@@ -83,8 +85,7 @@ public sealed class ShoppingCartsController : BaseController
         }
         else
         {
-            return BadRequest(payment.ErrorMessage);
+            return BadRequest(new { Message = payment.ErrorMessage });
         }
-        
     }
 }

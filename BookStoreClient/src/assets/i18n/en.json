@@ -53,6 +53,7 @@
     "cardnumber": "Credit Card Number",
     "expiredate": "Expire Date",
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "successfulPayment": "Your order has been successfully received :)"
 
 }

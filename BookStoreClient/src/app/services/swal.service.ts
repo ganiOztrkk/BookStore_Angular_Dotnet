@@ -34,6 +34,17 @@ export class SwalService {
       }
     })
   }
+  callPaymentSwal(title: string){
+    Swal.fire({
+      title: title,
+      icon: "success",
+      position: "center",
+      showCancelButton: false,
+      showConfirmButton: false,
+      showCloseButton: true
+    })
+  }
+
 
 }
 

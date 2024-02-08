@@ -4,6 +4,8 @@ import { PaymentModel } from '../models/payment.model';
 import { Cities } from '../constants/cities';
 import { Months } from '../constants/months';
 import { Years } from '../constants/years';
+import { TranslateService } from '@ngx-translate/core';
+import { SwalService } from '../services/swal.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -22,7 +24,9 @@ export class ShoppingCartComponent {
   cardNumber3: string = '0000';
   cardNumber4: string = '0016';
 
-  constructor(public shopping: ShoppingCartService) {
+  constructor(public shopping: ShoppingCartService,
+    private translate: TranslateService,
+    private swal: SwalService) {
     shopping.calculateOrder();
     this.request.shoes = this.shopping.shoppingCart;
   }
@@ -37,7 +41,14 @@ export class ShoppingCartComponent {
     this.request.buyer.country = this.request.shippingAddress.country;
     this.request.buyer.registrationAddress = this.request.shippingAddress.description;
     this.shopping.payment(this.request, (res) => {
-      
+      const modalCloseBtn = document.getElementById("paymentModalCloseBtn");
+      modalCloseBtn?.click();
+      localStorage.removeItem("shoppingCart");
+      this.shopping.shoppingCart = [];
+      this.shopping.checkLocalStoreForShoppingCart();
+      this.translate.get("successfulPayment").subscribe(traslatedMessage => {
+        this.swal.callPaymentSwal(traslatedMessage);
+      })
     });
 
   }

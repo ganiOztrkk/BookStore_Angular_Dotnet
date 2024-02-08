@@ -6,6 +6,7 @@ import { ShoeModel } from '../models/shoe.model';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { SwalService } from '../services/swal.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomeComponent {
     private http: HttpClient, 
     private shopping: ShoppingCartService,
     private swal: SwalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private spinner: NgxSpinnerService
     ) {
     this.getAll();
     this.getCategories();
@@ -33,11 +35,13 @@ export class HomeComponent {
 
   getAll(pageNumber: number = 1) {
     this.request.pageNumber = pageNumber;
+    this.spinner.show();
     this.http
       .post(`https://localhost:7048/api/Shoes/GetAll`, this.request)
       .subscribe((res) => {
         this.response = <ResponseModel>res;
         this.setPageNumber();
+        this.spinner.hide();
       });
   }
 

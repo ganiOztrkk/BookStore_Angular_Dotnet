@@ -53,5 +53,6 @@
     "cardnumber": "Kredi Kartı Numarası",
     "expiredate": "Son Kullanım Tarihi",
     "month": "Ay",
-    "year": "Yıl"
+    "year": "Yıl",
+    "successfulPayment": "Siparişiniz başarıyla oluşturuldu :)"
 }

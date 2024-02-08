@@ -14,6 +14,8 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { CartAnimationDirective } from './directives/cart.animation.directive';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -34,6 +36,8 @@ export function HttpLoaderFactory(http: HttpClient){
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
     SweetAlert2Module,
     TranslateModule.forRoot({
       loader: {

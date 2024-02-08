@@ -18,14 +18,15 @@
 </div>
 
 <div *ngIf="shopping.count > 0" class="row mt-3">
-  <div class="col-sm-12 col-md-8 col-lg-9 col-12">
+
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-9 col-12">
     <div
       *ngFor="let item of shopping.shoppingCart; let i = index"
       class="mt-2 card mb-4"
     >
       <div class="row">
-        <div class="col-3">
-          <div style="padding: 5px 5px">
+        <div class="col-sm-12 col-md-3">
+          <div class="d-flex justify-content-center" style="padding: 5px 5px">
             <img
               style="height: 215px; width: 240px"
               class="img-fluid"
@@ -34,7 +35,7 @@
           </div>
         </div>
         <div
-          class="col-6 d-flex flex-column align-items-center justify-content-center"
+          class="col-sm-12 col-md-5 d-flex flex-column align-items-center justify-content-center text-center"
         >
           <h4>{{ item.title }}</h4>
           <p>{{ item.description }}</p>
@@ -73,7 +74,8 @@
             </div>
           </div>
         </div>
-        <div class="col-3 d-flex justify-content-center align-items-center">
+
+        <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
           <div class="d-flex justify-content-center align-items-center">
             <span class="me-4" style="font-size: 25px; font-weight: 300">{{
               item.price | currency : "₺"
@@ -85,11 +87,12 @@
             ></i>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
-  <div class="col-sm-12 col-md-4 col-lg-3 col-12">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3 col-12">
     <button
       data-bs-toggle="modal"
       data-bs-target="#paymentModal"
@@ -157,6 +160,7 @@
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="paymentModalLabel">{{"payment"|translate}}</h1>
         <button
+          id="paymentModalCloseBtn"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
