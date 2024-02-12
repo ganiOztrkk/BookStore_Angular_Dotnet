@@ -16,6 +16,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<ShoeCategory> ShoeCategories { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderStatus> OrderStatus { get; set; }
+    public DbSet<User> Users { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,6 +24,10 @@ public sealed class AppDbContext : DbContext
         modelBuilder.Entity<OrderStatus>().HasIndex(x => new { x.Id, x.OrderNumber });
         //composite key - 2 id beraber key oluyor.
         modelBuilder.Entity<ShoeCategory>().HasKey(x => new { x.ShoeId, x.CategoryId });
+        //kullanıcının email ve username bilgileri uniq olmak zorunda
+        modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+        modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
+        
         modelBuilder.Entity<Shoe>().Property(x => x.Price).HasColumnType("money");
         modelBuilder.Entity<Order>().Property(x => x.Price).HasColumnType("money");
     }

@@ -90,7 +90,8 @@ public sealed class ShoppingCartsController : BaseController
             context.SaveChanges();
 
             var successMailSubject = "Satın Alma Bilgilendirme";
-            var successMailBody = $@"
+            var successMailBody = 
+                $@"
             <p>Sayın {paymentDto.Buyer.Name} {paymentDto.Buyer.Surname},</p>
             <p>Siparişiniz için teşekkür ederiz! JustKicks Store olarak, bizimle alışveriş yapmayı tercih ettiğiniz için memnuniyet duyuyoruz.</p>
     
