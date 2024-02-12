@@ -37,6 +37,7 @@
     "payment": "Payment",
     "name": "Name",
     "surname": "Surname",
+    "lastname": "Surname",
     "identitynumber": "Identity Number",
     "email": "Email",
     "gsmnumber": "GSM Number",
@@ -54,6 +55,15 @@
     "expiredate": "Expire Date",
     "month": "Month",
     "year": "Year",
-    "successfulPayment": "Your order has been successfully received :)"
-
+    "successfulPayment": "Your order has been successfully received :)",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "writeinfo": "Write requested informations",
+    "notregistered": "Don't you have account?",
+    "haveaccount": "Do you already have account?",
+    "usernamemail": "Username or Email",
+    "password": "Password",
+    "username": "Username",
+    "myprofile": "My Profile"
 }

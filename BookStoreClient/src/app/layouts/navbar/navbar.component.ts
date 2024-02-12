@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { SwalService } from '../../services/swal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +12,29 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class NavbarComponent {
 
-  
 
   constructor(
     private translate: TranslateService,
-    public shopping: ShoppingCartService
+    public shopping: ShoppingCartService,
+    public authService: AuthService,
+    private router: Router,
+    private swal: SwalService
     ) {
     translate.setDefaultLang("tr");
+    authService.isAuthenticated();
   }
+
+  
 
   switchLanguage(language: string){
     this.translate.use(language);
+  }
+
+  logout(){
+    localStorage.removeItem("accessToken");
+    this.router.navigateByUrl("");
+    this.swal.callToast("Çıkış Yapıldı", "info");
+
   }
   
 }

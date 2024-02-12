@@ -12,7 +12,7 @@ export class SwalService {
     const Toast = Swal.mixin({
       toast: true,
       position: 'bottom-end',
-      timer: 4000,
+      timer: 2000,
       timerProgressBar: true,
       showConfirmButton: false
     });

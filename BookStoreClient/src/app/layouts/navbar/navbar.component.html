@@ -1,6 +1,16 @@
 <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
   <div class="container">
     <a class="navbar-brand" routerLink="">JustKicks Store</a>
+    <div class="ms-1">
+      <select
+        #langSelect
+        (change)="switchLanguage(langSelect.value)"
+        class="form-control langSelect"
+      >
+        <option value="tr">TR</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,33 +25,72 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a style="font-size: 20px;" class="nav-link active" aria-current="page" routerLink="">{{ "home" | translate }}</a>
+          <a
+            style="font-size: 20px"
+            class="nav-link active"
+            aria-current="page"
+            routerLink=""
+            >{{ "home" | translate }}</a
+          >
         </li>
       </ul>
       <div class="d-flex">
+        <div *ngIf="!authService.isAuthenticated()">
+          <button routerLink="login" class="btn btn-outline-light">
+            <i class="fa-solid fa-user"></i>
+            {{ "login" | translate }}
+          </button>
+        </div>
+
         <div>
           <button
-          routerLink="shopping-cart"
-           class="btn btn-outline-light position-relative" type="submit">
+            routerLink="shopping-cart"
+            class="btn btn-outline-light position-relative ms-3"
+          >
             <i class="fa-solid fa-basket-shopping"></i>
-            <span *ngIf="shopping.count > 0" class="position-absolute top-100 start-0 translate-middle badge rounded-pill bg-danger">
-              {{shopping.count}}
+            <span
+              *ngIf="shopping.count > 0"
+              class="position-absolute top-100 start-0 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ shopping.count }}
             </span>
             {{ "cart" | translate }}
           </button>
         </div>
 
-        <div class="ms-1">
-          <select
-            #langSelect
-            (change)="switchLanguage(langSelect.value)"
-            class="form-control langSelect"
+        <div class="dropdown ms-1" *ngIf="authService.isAuthenticated()">
+          
+          <button
+            class="btn btn btn-outline-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            <option value="tr">TR</option>
-            <option value="en">EN</option>
-          </select>
-        </div>
+            <i class="fa-solid fa-user"></i>
+            {{ authService.userFullName }}
+          </button>
 
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                style="cursor: pointer"
+                (click)="logout()"
+                class="dropdown-item"
+              >
+                <i class="fa-solid fa-door-open"></i>
+                {{ "logout" | translate }}
+              </a>
+            </li>
+
+            <li>
+              <a style="cursor: pointer" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                {{ "myprofile" | translate }}
+              </a>
+            </li>
+          </ul>
+
+        </div>
       </div>
     </div>
   </div>

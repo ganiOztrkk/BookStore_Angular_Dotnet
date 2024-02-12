@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">{{ "login" | translate }}</h1>
+                <p class="text-center">{{ "writeinfo" | translate }}</p>
+            </div>
+            <div class="card-body">
+                <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off">
+                    <div class="form-group">
+                        <label for="usernameOrEmail">{{ "usernamemail" | translate }}</label>
+                        <input [(ngModel)]="usernameOrEmail" type="text" name="usernameOrEmail" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="password">{{ "password" | translate }}</label>
+                        <input [(ngModel)]="password" type="text" name="password" class="form-control">
+                    </div>
+                    <div class="form-group mt-2 text-end">
+                        <button class="btn btn-dark w-100 mb-1">
+                            {{ "login" | translate }}
+                        </button>
+                        <a routerLink="/register">{{"notregistered"|translate}}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

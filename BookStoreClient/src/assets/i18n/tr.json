@@ -37,6 +37,7 @@
     "payment": "Ödeme",
     "name": "Ad",
     "surname": "Soyad",
+    "lastname": "Soyad",
     "identitynumber": "TC. Kimlik No",
     "email": "Email",
     "gsmnumber": "GSM Numarası",
@@ -54,5 +55,15 @@
     "expiredate": "Son Kullanım Tarihi",
     "month": "Ay",
     "year": "Yıl",
-    "successfulPayment": "Siparişiniz başarıyla oluşturuldu :)"
+    "successfulPayment": "Siparişiniz başarıyla oluşturuldu :)",
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "register": "Kayıt Ol",
+    "writeinfo": "Bilgilerini giriniz",
+    "notregistered": "Hesabınız yok mu?",
+    "haveaccount": "Zaten hesabın var mı?",
+    "usernamemail": "Kullanıcı Adı ya da Mail Adresi",
+    "password": "Şifre",
+    "username": "Kullanıcı Adı",
+    "myprofile": "Profilim"
 }

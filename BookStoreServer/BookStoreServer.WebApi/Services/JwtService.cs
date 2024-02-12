@@ -13,7 +13,7 @@ public static class JwtService
         var claims = new List<Claim>()
         {
             new Claim("UserId", user.Id.ToString()),
-            new Claim("UserName", string.Join(" ",user.Name,user.Lastname)),
+            new Claim("UserFullName", string.Join(" ",user.Name,user.Lastname)),
             new Claim("Username", user.Username)
         };
         

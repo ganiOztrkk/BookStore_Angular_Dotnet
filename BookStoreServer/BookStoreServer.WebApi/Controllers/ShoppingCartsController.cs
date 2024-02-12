@@ -12,6 +12,30 @@ namespace BookStoreServer.WebApi.Controllers;
 
 public sealed class ShoppingCartsController : BaseController
 {
+
+    [HttpPost]
+    public IActionResult SetShoppingCartFromLocalStorage(List<SetShoppingCartDto> request)
+    {
+        var context = new AppDbContext();
+        var shoppingCart = new List<ShoppingCart>();
+        
+        request.ForEach(x =>
+        {
+            var shoppingCartProduct = new ShoppingCart
+            {
+                UserId = x.UserId,
+                ShoeId = x.ShoeId,
+                Quantity = x.Quantity,
+                Size = x.Size,
+                Price = x.Price
+            };
+            shoppingCart.Add(shoppingCartProduct);
+        });
+        context.AddRange(shoppingCart);
+        context.SaveChanges();
+        return NoContent();
+    }
+    
     [HttpPost]
     public IActionResult Payment(PaymentDto paymentDto)
     {
