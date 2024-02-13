@@ -22,7 +22,7 @@ export class HomeComponent {
 
   constructor(
     private http: HttpClient, 
-    private shopping: ShoppingCartService,
+    public shopping: ShoppingCartService,
     private swal: SwalService,
     private translate: TranslateService,
     private spinner: NgxSpinnerService
@@ -64,15 +64,4 @@ export class HomeComponent {
     this.getAll(1);
   }
 
-  addToCart(shoe: ShoeModel) {
-    this.shopping.shoppingCart.push(shoe);
-    localStorage.setItem(
-      'shoppingCart',
-      JSON.stringify(this.shopping.shoppingCart)
-    );
-    this.shopping.count++;
-    this.translate.get("addtobasketsuccess").subscribe(res => {
-      this.swal.callToast(res, "success");
-    })
-  }
 }

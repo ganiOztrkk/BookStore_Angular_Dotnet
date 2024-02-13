@@ -7,11 +7,39 @@ using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreServer.WebApi.Controllers;
 
 public sealed class ShoppingCartsController : BaseController
 {
+
+
+
+    [HttpGet("{userId:int}")]
+    public IActionResult GetUserCart(int userId)
+    {
+        var context = new AppDbContext();
+        var shoes = context.ShoppingCarts
+            .AsQueryable()
+            .Where(x => x.UserId == userId)
+            .Include(x => x.Shoe)
+            .Select(x => new Shoe
+            {
+                Id = x.Shoe.Id,
+                Title = x.Shoe.Title,
+                Description = x.Shoe.Description,
+                ImageUrl = x.Shoe.ImageUrl,
+                Price = x.Price,
+                IsActive = x.Shoe.IsActive,
+                IsDeleted = x.Shoe.IsDeleted,
+                CreateAt = x.Shoe.CreateAt
+            }).ToList();
+        
+        
+        return Ok(shoes);
+    }
+    
 
     [HttpPost]
     public IActionResult SetShoppingCartFromLocalStorage(List<SetShoppingCartDto> request)
@@ -35,6 +63,7 @@ public sealed class ShoppingCartsController : BaseController
         context.SaveChanges();
         return NoContent();
     }
+    
     
     [HttpPost]
     public IActionResult Payment(PaymentDto paymentDto)

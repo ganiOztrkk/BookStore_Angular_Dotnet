@@ -32,9 +32,10 @@ export class NavbarComponent {
 
   logout(){
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("shoppingCart");
+    this.shopping.checkLocalStoreForShoppingCart();
     this.router.navigateByUrl("");
     this.swal.callToast("Çıkış Yapıldı", "info");
-
   }
   
 }
