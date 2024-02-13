@@ -46,6 +46,7 @@ export class ShoppingCartService {
       .subscribe( res => {
         this.shoppingCart = res;
         this.count = res.length;
+        this.calculateOrder();
       })
     }
     
