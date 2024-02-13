@@ -7,4 +7,5 @@ export class ShoeModel{
     isActive: boolean = true;
     isDeleted: boolean = false;
     createAt: Date = new Date();
+    shoppingCartId: number = 0;
 }

@@ -3,7 +3,6 @@ using BookStoreServer.WebApi.Dtos;
 using BookStoreServer.WebApi.Enums;
 using BookStoreServer.WebApi.Models;
 using BookStoreServer.WebApi.Services;
-using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +12,36 @@ namespace BookStoreServer.WebApi.Controllers;
 
 public sealed class ShoppingCartsController : BaseController
 {
-
-
+    [HttpPost]
+    public IActionResult Add(SetShoppingCartDto request)
+    {
+        var context = new AppDbContext();
+        var cart = new ShoppingCart
+        {
+            UserId = request.UserId,
+            ShoeId = request.UserId,
+            Quantity = 1,
+            Size = 40,
+            Price = request.Price
+        };
+        context.Add(cart);
+        context.SaveChanges();
+        return NoContent();
+    }
+    
+    
+    [HttpGet("{id:int}")]
+    public IActionResult RemoveById(int id)
+    {
+        var context = new AppDbContext();
+        var cartItem = context.ShoppingCarts.FirstOrDefault(x => x.Id == id);
+        if (cartItem is null) return NoContent();
+        
+        context.Remove(cartItem);
+        context.SaveChanges();
+        return NoContent();
+    }
+    
 
     [HttpGet("{userId:int}")]
     public IActionResult GetUserCart(int userId)
@@ -24,9 +51,10 @@ public sealed class ShoppingCartsController : BaseController
             .AsQueryable()
             .Where(x => x.UserId == userId)
             .Include(x => x.Shoe)
-            .Select(x => new Shoe
+            .Select(x => new ShoppingCartResponseDto
             {
                 Id = x.Shoe.Id,
+                ShoppingCartId = x.Id,
                 Title = x.Shoe.Title,
                 Description = x.Shoe.Description,
                 ImageUrl = x.Shoe.ImageUrl,

@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { PaymentModel } from '../models/payment.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './auth.service';
+import { SetShoppingCartModel } from '../models/set-shopping-cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -108,10 +109,20 @@ export class ShoppingCartService {
         this.translate.get("yes").subscribe((yesBtn: string) => {
             this.translate.get("cancel").subscribe((cancelBtn: string) => {
                 this.swal.callSwal(title, cancelBtn, yesBtn, () => {
+
+                  if (localStorage.getItem("accessToken")) {
+                    this.http
+                    .get("https://localhost:7048/api/ShoppingCarts/RemoveById/"+ this.shoppingCart[index]?.shoppingCartId)
+                    .subscribe( res =>{
+                      this.checkLocalStoreForShoppingCart();
+                    })  
+                  }else{
                     this.shoppingCart.splice(index, 1);
                     localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
                     this.count = this.shoppingCart.length;
                     this.calculateOrder();
+                  }
+
                 });
             });
         });
@@ -119,15 +130,33 @@ export class ShoppingCartService {
   }
 
   addToCart(shoe: ShoeModel) {
-    this.shoppingCart.push(shoe);
-    localStorage.setItem(
-      'shoppingCart',
-      JSON.stringify(this.shoppingCart)
-    );
-    this.count++;
-    this.translate.get("addtobasketsuccess").subscribe(res => {
-      this.swal.callToast(res, "success");
-    })
+    this.authService.isAuthenticated();
+
+    if (localStorage.getItem("accessToken")) {
+      const cartItem: SetShoppingCartModel = new SetShoppingCartModel();
+      cartItem.userId = parseInt(this.authService.userId);
+      cartItem.shoeId = shoe.id;
+      cartItem.price = shoe.price;
+      cartItem.size = 40;
+      cartItem.quantity = 1;
+
+
+      this.http.post("https://localhost:7048/api/ShoppingCarts/Add",cartItem).subscribe( res => {
+        this.checkLocalStoreForShoppingCart();
+        this.translate.get("addtobasketsuccess").subscribe(res => {
+          this.swal.callToast(res, "success");
+        })
+      });
+
+    }else{
+      this.shoppingCart.push(shoe);
+      localStorage.setItem('shoppingCart',JSON.stringify(this.shoppingCart));
+
+      this.count++;
+      this.translate.get("addtobasketsuccess").subscribe(res => {
+        this.swal.callToast(res, "success");
+      })
+    }
   }
 
 
