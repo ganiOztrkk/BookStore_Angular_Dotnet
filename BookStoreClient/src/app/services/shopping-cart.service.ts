@@ -136,6 +136,9 @@ export class ShoppingCartService {
       const cartItem: SetShoppingCartModel = new SetShoppingCartModel();
       cartItem.userId = parseInt(this.authService.userId);
       cartItem.shoeId = shoe.id;
+      cartItem.imageUrl = shoe.imageUrl;
+      cartItem.title = shoe.title;
+      cartItem.description = shoe.description;
       cartItem.price = shoe.price;
       cartItem.size = 40;
       cartItem.quantity = 1;

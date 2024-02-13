@@ -1,6 +1,7 @@
 import { ShoeModel } from "./shoe.model";
 
 export class PaymentModel{
+    userId: number = 0 ;
     shoes: ShoeModel[] = [];
     buyer: BuyerModel = new BuyerModel();
     shippingAddress: AddressModel = new AddressModel();

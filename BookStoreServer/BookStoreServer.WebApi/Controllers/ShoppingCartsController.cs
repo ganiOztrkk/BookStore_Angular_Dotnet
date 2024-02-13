@@ -19,7 +19,10 @@ public sealed class ShoppingCartsController : BaseController
         var cart = new ShoppingCart
         {
             UserId = request.UserId,
-            ShoeId = request.UserId,
+            ShoeId = request.ShoeId,
+            Title = request.Title,
+            Description = request.Description,
+            ImageUrl = request.ImageUrl,
             Quantity = 1,
             Size = 40,
             Price = request.Price
@@ -81,9 +84,12 @@ public sealed class ShoppingCartsController : BaseController
             {
                 UserId = x.UserId,
                 ShoeId = x.ShoeId,
+                Title = x.Title,
+                Description = x.Description,
+                ImageUrl = x.ImageUrl,
                 Quantity = x.Quantity,
                 Size = x.Size,
-                Price = x.Price
+                Price = x.Price,
             };
             shoppingCart.Add(shoppingCartProduct);
         });
@@ -166,49 +172,56 @@ public sealed class ShoppingCartsController : BaseController
                 StatusDate = DateTime.Now
             };
             var context = new AppDbContext();
-            context.OrderStatus.Add(orderStatus);
             context.Orders.AddRange(orders);
+            context.OrderStatus.Add(orderStatus);
+
+            var user = context.Users.Find(paymentDto.UserId);
+            if (user is not null)
+            {
+                var cartItems = context.ShoppingCarts.Where(x => x.UserId == paymentDto.UserId).ToList();
+                context.RemoveRange(cartItems);
+            }
             context.SaveChanges();
 
-            var successMailSubject = "Satın Alma Bilgilendirme";
+            const string successMailSubject = "Satın Alma Bilgilendirme";
             var successMailBody = 
                 $@"
-            <p>Sayın {paymentDto.Buyer.Name} {paymentDto.Buyer.Surname},</p>
-            <p>Siparişiniz için teşekkür ederiz! JustKicks Store olarak, bizimle alışveriş yapmayı tercih ettiğiniz için memnuniyet duyuyoruz.</p>
-    
-            <h3>Sipariş Detayları:</h3>
-            <ul>
-                <li><strong>Sipariş Numarası:</strong> {orderNumber}</li>
-                <li><strong>Sipariş Tarihi:</strong> {orders[0].PaymentDate.ToShortDateString()}</li>
-                <li><strong>Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
-            </ul>
+                <p>Sayın {paymentDto.Buyer.Name} {paymentDto.Buyer.Surname},</p>
+                <p>Siparişiniz için teşekkür ederiz! JustKicks Store olarak, bizimle alışveriş yapmayı tercih ettiğiniz için memnuniyet duyuyoruz.</p>
+        
+                <h3>Sipariş Detayları:</h3>
+                <ul>
+                    <li><strong>Sipariş Numarası:</strong> {orderNumber}</li>
+                    <li><strong>Sipariş Tarihi:</strong> {orders[0].PaymentDate.ToShortDateString()}</li>
+                    <li><strong>Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
+                </ul>
 
-            <h3>Teslimat Bilgileri:</h3>
-            <ul>
-                <li><strong>Alıcı Adı:</strong> {paymentDto.ShippingAddress.ContactName}</li>
-                <li><strong>Teslimat Adresi:</strong> {paymentDto.ShippingAddress.Description}</li>
-                <li><strong>Tahmini Teslimat Tarihi:</strong> {orders[0].PaymentDate.AddDays(3).ToShortDateString()}</li>
-            </ul>
+                <h3>Teslimat Bilgileri:</h3>
+                <ul>
+                    <li><strong>Alıcı Adı:</strong> {paymentDto.ShippingAddress.ContactName}</li>
+                    <li><strong>Teslimat Adresi:</strong> {paymentDto.ShippingAddress.Description}</li>
+                    <li><strong>Tahmini Teslimat Tarihi:</strong> {orders[0].PaymentDate.AddDays(3).ToShortDateString()}</li>
+                </ul>
 
-            <h3>Ödeme Bilgileri:</h3>
-            <ul>
-                <li><strong>Toplam Tutar:</strong> {request.Price}</li>
-                <li><strong>Ödenen Tutar:</strong> {request.PaidPrice}</li>
-                <li><strong>Kullanılan Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
-            </ul>
+                <h3>Ödeme Bilgileri:</h3>
+                <ul>
+                    <li><strong>Toplam Tutar:</strong> {request.Price}</li>
+                    <li><strong>Ödenen Tutar:</strong> {request.PaidPrice}</li>
+                    <li><strong>Kullanılan Ödeme Yöntemi:</strong> {orders[0].PaymentType}</li>
+                </ul>
 
-            <h3>İletişim Bilgileri:</h3>
-            <p>Siparişinizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen çekinmeden bizimle iletişime geçin. Müşteri hizmetleri ekibimiz her zaman yardımcı olmaktan mutluluk duyacaktır.</p>
-            <p>Telefon: +90 530 999 99 99</p>
-            
-            <p>İlginiz ve güveniniz için tekrar teşekkür ederiz.</p>
-            <p>Saygılarımla,</p>
-            <p>Gani Ozturk<br>
-            Müşteri Hizmetleri Departmanı<br>
-            JustKicks Store<br>
-            Tekirdag / Cerkezkoy<br>
-            Tel: +90 530 999 99 99<br>
-            Web: <a href=""www.justkicks.com"">www.justkicks.com</a></p>
+                <h3>İletişim Bilgileri:</h3>
+                <p>Siparişinizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen çekinmeden bizimle iletişime geçin. Müşteri hizmetleri ekibimiz her zaman yardımcı olmaktan mutluluk duyacaktır.</p>
+                <p>Telefon: +90 530 999 99 99</p>
+                
+                <p>İlginiz ve güveniniz için tekrar teşekkür ederiz.</p>
+                <p>Saygılarımla,</p>
+                <p>Gani Ozturk<br>
+                Müşteri Hizmetleri Departmanı<br>
+                JustKicks Store<br>
+                Tekirdag / Cerkezkoy<br>
+                Tel: +90 530 999 99 99<br>
+                Web: <a href=""www.justkicks.com"">www.justkicks.com</a></p>
             ";
             var mailResponse = MailService.SendEmailAsync(paymentDto.Buyer.Email, successMailSubject, successMailBody);
 

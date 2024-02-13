@@ -49,6 +49,9 @@ export class LoginComponent {
             cartItem.quantity = 1
             cartItem.shoeId = x.id;
             cartItem.price = x.price;
+            cartItem.imageUrl = x.imageUrl;
+            cartItem.description = x.description;
+            cartItem.title = x.title;
             cartItems.push(cartItem)
           }
 
