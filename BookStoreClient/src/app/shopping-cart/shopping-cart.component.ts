@@ -56,7 +56,6 @@ export class ShoppingCartComponent {
         this.swal.callPaymentSwal(traslatedMessage);
       })
     });
-
   }
 
   changeIsSameAddress() {
