@@ -65,5 +65,9 @@
     "usernamemail": "Username or Email",
     "password": "Password",
     "username": "Username",
-    "myprofile": "My Profile"
+    "myprofile": "My Profile",
+    "status0error": "Api is not available",
+    "status404error": "Api not found",
+    "notknownerrorstatus": "Unknow error. Contact with admin."
+
 }

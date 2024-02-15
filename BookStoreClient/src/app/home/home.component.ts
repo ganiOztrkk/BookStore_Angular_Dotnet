@@ -1,12 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RequestModel } from '../models/request.model';
 import { ResponseModel } from '../models/response.model';
-import { ShoeModel } from '../models/shoe.model';
 import { ShoppingCartService } from '../services/shopping-cart.service';
-import { SwalService } from '../services/swal.service';
-import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +21,8 @@ export class HomeComponent {
   constructor(
     private http: HttpClient, 
     public shopping: ShoppingCartService,
-    private swal: SwalService,
-    private translate: TranslateService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private error: ErrorService
     ) {
     this.getAll();
     this.getCategories();
@@ -38,17 +35,29 @@ export class HomeComponent {
     this.spinner.show();
     this.http
       .post(`https://localhost:7048/api/Shoes/GetAll`, this.request)
-      .subscribe((res) => {
-        this.response = <ResponseModel>res;
-        this.setPageNumber();
-        this.spinner.hide();
+      .subscribe({
+        next: (res) => {
+          this.response = <ResponseModel>res;
+          this.setPageNumber();
+          this.spinner.hide();
+        },
+        error: (err : HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
       });
   }
 
   getCategories() {
     this.http
       .get('https://localhost:7048/api/Categories/GetAll')
-      .subscribe((res) => (this.categories = res));
+      .subscribe({
+        next: (res) => {
+          this.categories = res
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
+      });
   }
 
   setPageNumber() {

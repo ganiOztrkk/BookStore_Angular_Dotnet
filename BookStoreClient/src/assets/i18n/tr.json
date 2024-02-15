@@ -65,5 +65,8 @@
     "usernamemail": "Kullanıcı Adı ya da Mail Adresi",
     "password": "Şifre",
     "username": "Kullanıcı Adı",
-    "myprofile": "Profilim"
+    "myprofile": "Profilim",
+    "status0error": "Api'den cevap alınamıyor.",
+    "status404error": "Api bulunamadı",
+    "notknownerrorstatus": "Bilinmeyen hata oluştu. Yöneticiyle iletişime geçin."
 }

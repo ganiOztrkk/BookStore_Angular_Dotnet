@@ -7,9 +7,10 @@ import { PaymentModel } from '../models/payment.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './auth.service';
 import { SetShoppingCartModel } from '../models/set-shopping-cart.model';
+import { ErrorService } from './error.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoppingCartService {
   subtotal: number = 0;
@@ -18,80 +19,89 @@ export class ShoppingCartService {
   discount: number = 0;
   count: number = 0;
   shoppingCart: any[] = [];
-  
+
   constructor(
     private swal: SwalService,
     private translate: TranslateService,
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private authService: AuthService
+    private authService: AuthService,
+    private error: ErrorService,
   ) {
     this.checkLocalStoreForShoppingCart();
   }
 
-  checkLocalStoreForShoppingCart(){
+  checkLocalStoreForShoppingCart() {
     this.authService.isAuthenticated();
-    if (localStorage.getItem("shoppingCart")) {
-      const cart : string | null = localStorage.getItem("shoppingCart");
+    if (localStorage.getItem('shoppingCart')) {
+      const cart: string | null = localStorage.getItem('shoppingCart');
       if (cart !== null) {
         this.shoppingCart = JSON.parse(cart);
       }
-    }else{
+    } else {
       this.shoppingCart = [];
       this.count = 0;
     }
 
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem('accessToken')) {
       this.http
-      .get<any[]>("https://localhost:7048/api/ShoppingCarts/GetUserCart/"+this.authService.userId)
-      .subscribe( res => {
-        this.shoppingCart = res;
-        this.count = res.length;
-        this.calculateOrder();
-      })
+        .get<any[]>(
+          'https://localhost:7048/api/ShoppingCarts/GetUserCart/' +
+            this.authService.userId
+        )
+        .subscribe({
+          next: (res) => {
+            this.shoppingCart = res;
+            this.count = res.length;
+            this.calculateOrder();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.error.errorHandler(err);
+          }
+        });
     }
-    
+
     this.calculateOrder();
   }
 
-   //#region priceCalculation
+  //#region priceCalculation
 
-   calculateShipping(chartCount: number){
+  calculateShipping(chartCount: number) {
     if (chartCount > 2) {
       this.shipping = 0;
-    }else{
+    } else {
       this.shipping = 35;
     }
   }
 
-  calculateDiscount(subtotal: number){
+  calculateDiscount(subtotal: number) {
     if (subtotal > 5000) {
-      this.discount = -0.10 * subtotal;
-    }else {
+      this.discount = -0.1 * subtotal;
+    } else {
       this.discount = 0;
-  }
+    }
   }
 
-  calculateSubtotal(shoppingCart: ShoeModel[]){
+  calculateSubtotal(shoppingCart: ShoeModel[]) {
     this.subtotal = 0;
-    for(let item of shoppingCart){
+    for (let item of shoppingCart) {
       this.subtotal += item.price;
     }
   }
 
-  calculateTotal(subtotal:number, shipping:number, discount:number){
+  calculateTotal(subtotal: number, shipping: number, discount: number) {
     this.total = subtotal + shipping + discount;
   }
 
-  calculateCartLength(){
+  calculateCartLength() {
     if (this.shoppingCart.length === 0) {
       this.count = 0;
-    }else{
+    } else {
       this.count = this.shoppingCart.length;
     }
   }
 
-  calculateOrder(){
+  calculateOrder() {
     this.calculateCartLength();
     this.calculateSubtotal(this.shoppingCart);
     this.calculateShipping(this.count);
@@ -99,40 +109,46 @@ export class ShoppingCartService {
     this.calculateTotal(this.subtotal, this.shipping, this.discount);
   }
 
-  
-
   //#endregion
 
-
   removeByIndex(index: number) {
-    this.translate.get("suretodelete").subscribe((title: string) => {
-        this.translate.get("yes").subscribe((yesBtn: string) => {
-            this.translate.get("cancel").subscribe((cancelBtn: string) => {
-                this.swal.callSwal(title, cancelBtn, yesBtn, () => {
-
-                  if (localStorage.getItem("accessToken")) {
-                    this.http
-                    .get("https://localhost:7048/api/ShoppingCarts/RemoveById/"+ this.shoppingCart[index]?.shoppingCartId)
-                    .subscribe( res =>{
-                      this.checkLocalStoreForShoppingCart();
-                    })  
-                  }else{
-                    this.shoppingCart.splice(index, 1);
-                    localStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
-                    this.count = this.shoppingCart.length;
-                    this.calculateOrder();
+    this.translate.get('suretodelete').subscribe((title: string) => {
+      this.translate.get('yes').subscribe((yesBtn: string) => {
+        this.translate.get('cancel').subscribe((cancelBtn: string) => {
+          this.swal.callSwal(title, cancelBtn, yesBtn, () => {
+            if (localStorage.getItem('accessToken')) {
+              this.http
+                .get(
+                  'https://localhost:7048/api/ShoppingCarts/RemoveById/' +
+                    this.shoppingCart[index]?.shoppingCartId
+                )
+                .subscribe({
+                  next: (res) => {
+                    this.checkLocalStoreForShoppingCart();
+                  },
+                  error: (err: HttpErrorResponse) => {
+                    this.error.errorHandler(err);
                   }
-
                 });
-            });
+            } else {
+              this.shoppingCart.splice(index, 1);
+              localStorage.setItem(
+                'shoppingCart',
+                JSON.stringify(this.shoppingCart)
+              );
+              this.count = this.shoppingCart.length;
+              this.calculateOrder();
+            }
+          });
         });
+      });
     });
   }
 
   addToCart(shoe: ShoeModel) {
     this.authService.isAuthenticated();
 
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem('accessToken')) {
       const cartItem: SetShoppingCartModel = new SetShoppingCartModel();
       cartItem.userId = parseInt(this.authService.userId);
       cartItem.shoeId = shoe.id;
@@ -143,38 +159,43 @@ export class ShoppingCartService {
       cartItem.size = 40;
       cartItem.quantity = 1;
 
-
-      this.http.post("https://localhost:7048/api/ShoppingCarts/Add",cartItem).subscribe( res => {
-        this.checkLocalStoreForShoppingCart();
-        this.translate.get("addtobasketsuccess").subscribe(res => {
-          this.swal.callToast(res, "success");
-        })
-      });
-
-    }else{
+      this.http
+        .post('https://localhost:7048/api/ShoppingCarts/Add', cartItem)
+        .subscribe({
+          next: (res) => {
+            this.checkLocalStoreForShoppingCart();
+            this.translate.get('addtobasketsuccess').subscribe((res) => {
+              this.swal.callToast(res, 'success');
+            });
+          },
+          error: (err: HttpErrorResponse)=> {
+            this.error.errorHandler(err);
+          }
+        });
+    } else {
       this.shoppingCart.push(shoe);
-      localStorage.setItem('shoppingCart',JSON.stringify(this.shoppingCart));
+      localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart));
 
       this.count++;
-      this.translate.get("addtobasketsuccess").subscribe(res => {
-        this.swal.callToast(res, "success");
-      })
+      this.translate.get('addtobasketsuccess').subscribe((res) => {
+        this.swal.callToast(res, 'success');
+      });
     }
   }
 
-
-  payment(data: PaymentModel, callBack: (res: any) => void){
+  payment(data: PaymentModel, callBack: (res: any) => void) {
     this.spinner.show();
     this.http
-    .post("https://localhost:7048/api/ShoppingCarts/Payment", data)
-    .subscribe({
-      next: (res) => {
-        callBack(res);
-        this.spinner.hide();
-      },
-      error: (err:HttpErrorResponse) => {
-        console.log(err);
-      }
-    })
+      .post('https://localhost:7048/api/ShoppingCarts/Payment', data)
+      .subscribe({
+        next: (res) => {
+          callBack(res);
+          this.spinner.hide();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+          this.spinner.hide();
+        },
+      });
   }
 }
