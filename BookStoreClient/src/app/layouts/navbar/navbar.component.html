@@ -1,16 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
   <div class="container">
-    <a class="navbar-brand" routerLink="">JustKicks Store</a>
-    <div class="ms-1">
-      <select
-        #langSelect
-        (change)="switchLanguage(langSelect.value)"
-        class="form-control langSelect"
-      >
-        <option value="tr">TR</option>
-        <option value="en">EN</option>
-      </select>
-    </div>
+    <img class="me-2" style="height: 55px; cursor: pointer;" src="https://i.hizliresim.com/tbuheqt.png" routerLink=""/>
     <button
       class="navbar-toggler"
       type="button"
@@ -23,8 +13,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- home button belki açabiliriz -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+       <!--  <li class="nav-item">
           <a
             style="font-size: 20px"
             class="nav-link active"
@@ -32,20 +23,15 @@
             routerLink=""
             >{{ "home" | translate }}</a
           >
-        </li>
+        </li> -->
       </ul>
+      
       <div class="d-flex">
-        <div *ngIf="!authService.isAuthenticated()">
-          <button routerLink="login" class="btn btn-outline-light">
-            <i class="fa-solid fa-user"></i>
-            {{ "login" | translate }}
-          </button>
-        </div>
 
         <div>
           <button
             routerLink="shopping-cart"
-            class="btn btn-outline-light position-relative ms-3"
+            class="btn btn-outline-light position-relative me-1"
           >
             <i class="fa-solid fa-basket-shopping"></i>
             <span
@@ -55,6 +41,13 @@
               {{ shopping.count }}
             </span>
             {{ "cart" | translate }}
+          </button>
+        </div>
+
+        <div *ngIf="!authService.isAuthenticated()">
+          <button routerLink="login" class="btn btn-outline-light">
+            <i class="fa-solid fa-user"></i>
+            {{ "login" | translate }}
           </button>
         </div>
 
@@ -90,6 +83,17 @@
             </li>
           </ul>
 
+        </div>
+
+        <div class="ms-1">
+          <select
+            #langSelect
+            (change)="switchLanguage(langSelect.value)"
+            class="form-control langSelect"
+          >
+            <option value="tr">TR</option>
+            <option value="en">EN</option>
+          </select>
         </div>
       </div>
     </div>

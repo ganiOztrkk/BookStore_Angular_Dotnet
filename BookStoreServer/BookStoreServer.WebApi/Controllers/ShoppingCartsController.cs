@@ -157,6 +157,7 @@ public sealed class ShoppingCartsController : BaseController
                 {
                     OrderNumber = orderNumber,
                     ShoeId = x.Id,
+                    UserId = paymentDto.UserId,
                     Price = x.Price,
                     PaymentDate = DateTime.Now,
                     PaymentType = "Credit Card",

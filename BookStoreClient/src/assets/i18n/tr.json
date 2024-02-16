@@ -68,5 +68,10 @@
     "myprofile": "Profilim",
     "status0error": "Api'den cevap alınamıyor.",
     "status404error": "Api bulunamadı",
-    "notknownerrorstatus": "Bilinmeyen hata oluştu. Yöneticiyle iletişime geçin."
+    "notknownerrorstatus": "Bilinmeyen hata oluştu. Yöneticiyle iletişime geçin.",
+    "fastdelivery": "Hızlı Teslimat",
+    "securepayment": "Güvenli Ödeme",
+    "bestdeal": "En İyi Fiyat",
+    "undermaintenance": "SİTE ŞU AN BAKIMDA",
+    "comingsoon": "ÇOK YAKINDA SİZLERLEYİZ"
 }

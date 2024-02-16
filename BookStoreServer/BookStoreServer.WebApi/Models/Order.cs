@@ -6,6 +6,7 @@ namespace BookStoreServer.WebApi.Models;
 public sealed class Order
 {
     public int Id { get; set; }
+    public int? UserId { get; set; }
     public string OrderNumber { get; set; } = string.Empty;
     
     [ForeignKey("Shoe")]

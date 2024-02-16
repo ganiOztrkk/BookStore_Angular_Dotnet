@@ -11,12 +11,13 @@ import { ErrorService } from '../services/error.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent{
   response: ResponseModel = new ResponseModel();
   categories: any = [];
   pageNumbers: number[] = [];
   request: RequestModel = new RequestModel();
   searchCategory: string = '';
+
 
   constructor(
     private http: HttpClient, 
@@ -26,9 +27,8 @@ export class HomeComponent {
     ) {
     this.getAll();
     this.getCategories();
-
-
   }
+
 
   getAll(pageNumber: number = 1) {
     this.request.pageNumber = pageNumber;
@@ -43,6 +43,7 @@ export class HomeComponent {
         },
         error: (err : HttpErrorResponse) => {
           this.error.errorHandler(err);
+          this.spinner.hide();
         }
       });
   }
@@ -73,4 +74,5 @@ export class HomeComponent {
     this.getAll(1);
   }
 
+  
 }

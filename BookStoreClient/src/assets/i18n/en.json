@@ -68,6 +68,10 @@
     "myprofile": "My Profile",
     "status0error": "Api is not available",
     "status404error": "Api not found",
-    "notknownerrorstatus": "Unknow error. Contact with admin."
-
+    "notknownerrorstatus": "Unknow error. Contact with admin.",
+    "fastdelivery": "Fast Delivery",
+    "securepayment": "Secure Payment",
+    "bestdeal": "Best Deal",
+    "undermaintenance": "SITE IS UNDER MAINTENANCE",
+    "comingsoon": "COMING SOON"
 }

@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
       {
         path: "shopping-cart",
         component: ShoppingCartComponent
+      },
+      {
+        path: "order",
+        component: OrderComponent
+      },
+      {
+        path: "under-maintenance",
+        component: UnderMaintenanceComponent
       }
     ]
   }

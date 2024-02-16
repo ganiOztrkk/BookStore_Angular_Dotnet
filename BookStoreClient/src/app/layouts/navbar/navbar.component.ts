@@ -36,6 +36,9 @@ export class NavbarComponent {
     this.shopping.checkLocalStoreForShoppingCart();
     this.router.navigateByUrl("");
     this.swal.callToast("Çıkış Yapıldı", "info");
+    this.authService.isAuthenticated();
+    this.authService.userId = "";
   }
   
+
 }
