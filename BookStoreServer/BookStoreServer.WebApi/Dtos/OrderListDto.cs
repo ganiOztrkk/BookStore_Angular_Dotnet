@@ -1,3 +1,4 @@
+using BookStoreServer.WebApi.Enums;
 using BookStoreServer.WebApi.Models;
 
 namespace BookStoreServer.WebApi.Dtos;
@@ -7,8 +8,8 @@ public sealed record OrderListDto(
     string OrderNumber,
     Shoe Shoe,
     decimal Price,
-    DateTime PaymentDate,
+    string PaymentDate,
     string PaymentType,
     string PaymentNumber,
-    List<OrderStatus> OrderStatus
+    OrderStatusEnum OrderStatus
     );

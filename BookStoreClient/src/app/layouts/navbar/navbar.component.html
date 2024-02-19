@@ -65,6 +65,20 @@
 
           <ul class="dropdown-menu">
             <li>
+              <a style="cursor: pointer" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                {{ "myprofile" | translate }}
+              </a>
+            </li>
+
+            <li>
+              <a routerLink="order" style="cursor: pointer" class="dropdown-item">
+                <i class="fa-solid fa-box-open"></i>
+                {{ "orders" | translate }}
+              </a>
+            </li>
+
+            <li>
               <a
                 style="cursor: pointer"
                 (click)="logout()"
@@ -75,12 +89,6 @@
               </a>
             </li>
 
-            <li>
-              <a style="cursor: pointer" class="dropdown-item">
-                <i class="fa-solid fa-user"></i>
-                {{ "myprofile" | translate }}
-              </a>
-            </li>
           </ul>
 
         </div>

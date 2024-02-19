@@ -73,5 +73,21 @@
     "securepayment": "Güvenli Ödeme",
     "bestdeal": "En İyi Fiyat",
     "undermaintenance": "SİTE ŞU AN BAKIMDA",
-    "comingsoon": "ÇOK YAKINDA SİZLERLEYİZ"
+    "comingsoon": "ÇOK YAKINDA SİZLERLEYİZ",
+    "orders": "Siparişlerim",
+    "orderdate": "Sipariş Tarihi",
+    "paymentnumber": "Ödeme Numarası",
+    "amount": "Tutar",
+    "orderdetails": "Sipariş Detayı",
+    "pendingapproval": "Onay Bekliyor",
+    "preparing" : "Hazırlanıyor",
+    "intransit": "Kargoda",
+    "delivered": "Teslim Edildi",
+    "rejected": "Reddedildi",
+    "returned": "İade Edildi",
+    "ordernumber": "Sipariş Numarası",
+    "ordersum": "Sipariş Özeti",
+    "rateproduct": "Ürünü Değerlendir",
+    "orderamount": "Toplam Sipariş Tutarı:",
+    "refundrequest": "İade Talebi"
 }

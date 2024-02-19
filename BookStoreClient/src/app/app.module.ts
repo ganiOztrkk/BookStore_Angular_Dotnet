@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance.component';
 import { OrderComponent } from './order/order.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient){
     LoginComponent,
     RegisterComponent,
     UnderMaintenanceComponent,
-    OrderComponent
+    OrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

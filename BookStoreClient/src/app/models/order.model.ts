@@ -1,4 +1,4 @@
-import { OrderStatusModel } from "./order-status-model";
+import { OrderStatusEnum } from "./order-status-enum";
 import { ShoeModel } from "./shoe.model";
 
 export class OrderModel{
@@ -9,5 +9,5 @@ export class OrderModel{
     paymentDate: string = "";
     paymentType: string = "";
     paymentNumber: string = "";
-    orderStatus: OrderStatusModel[] = [];
+    orderStatus: OrderStatusEnum = OrderStatusEnum.PendingApproval;
 }

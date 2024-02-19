@@ -73,5 +73,21 @@
     "securepayment": "Secure Payment",
     "bestdeal": "Best Deal",
     "undermaintenance": "SITE IS UNDER MAINTENANCE",
-    "comingsoon": "COMING SOON"
+    "comingsoon": "COMING SOON",
+    "orders": "Orders",
+    "orderdate": "Order Date",
+    "paymentnumber": "Payment Number",
+    "amount": "Amount",
+    "orderdetails": "Order Details",
+    "pendingapproval": "Pending Approval",
+    "preparing" : "Preparing",
+    "intransit": "In Transit",
+    "delivered": "Delivered",
+    "rejected": "Rejected",
+    "returned": "Returned",
+    "ordernumber": "Order Number",
+    "ordersum": "Order Sum",
+    "rateproduct": "Rate the Product",
+    "orderamount": "Order Total Amount:",
+    "refund request": "Refund Request"
 }

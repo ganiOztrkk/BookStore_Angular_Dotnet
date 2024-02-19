@@ -1,0 +1,132 @@
+<div class="col-12">
+  <div class="mt-2 card mb-4">
+    <div class="card-header p-3">
+      <div class="row d-flex justify-content-around align-items-center">
+        <div
+          style="color: #666; font-weight: bold; font-size: 18px"
+          class="col-2 d-flex justify-content-start align-items-center"
+        >
+          <i
+            style="border: 1px solid; border-radius: 100px; padding: 7px"
+            class="fa-solid fa-box-open me-2"
+          ></i>
+          {{ "orderdetails" | translate }}
+        </div>
+        <div
+          style="color: #666; font-weight: bold; font-size: 13px"
+          class="col-3 d-flex flex-column"
+        >
+          {{ "orderdate" | translate }}
+          <b style="color: #333; font-weight: 400">{{ orders[0].paymentDate }}</b>
+        </div>
+        <div
+          style="color: #666; font-weight: bold; font-size: 13px"
+          class="col-3 d-flex flex-column"
+        >
+          {{ "paymentnumber" | translate }}
+          <b style="color: #333; font-weight: 400">{{ orders[0].paymentNumber }}</b>
+        </div>
+        <div
+          style="color: #666; font-weight: bold; font-size: 13px"
+          class="col-2 d-flex flex-column"
+        >
+          {{ "ordernumber" | translate }}
+          <b style="color: #333; font-weight: 400">{{ orders[0].orderNumber }}</b>
+        </div>
+        <div
+          style="color: #666; font-weight: bold; font-size: 13px"
+          class="col-2 d-flex flex-column"
+        >
+          {{ "ordersum" | translate }}
+          <b style="color: #333; font-weight: 400">{{ orders.length }} {{"product"|translate}}</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="mb-3">
+        <span
+          *ngIf="orders[0].orderStatus === 0"
+          style="font-size: 15px; color: #ffc000"
+        >
+          <i class="fa-solid fa-hourglass-start" style="color: #ffc000"></i>
+          {{ "pendingapproval" | translate }}
+        </span>
+        <span
+          *ngIf="orders[0].orderStatus === 1"
+          style="font-size: 15px; color: #169ad6"
+        >
+          <i class="fa-solid fa-hourglass-half" style="color: #169ad6"></i>
+          {{ "preparing" | translate }}
+        </span>
+        <span
+          *ngIf="orders[0].orderStatus === 2"
+          style="font-size: 15px; color: #169ad6"
+        >
+          <i class="fa-solid fa-truck" style="color: #169ad6"></i>
+          {{ "intransit" | translate }}
+        </span>
+        <span
+          *ngIf="orders[0].orderStatus === 3"
+          style="font-size: 15px; color: #0bc15c"
+        >
+          <i class="fa-solid fa-check" style="color: #0bc15c"></i>
+          {{ "delivered" | translate }}
+        </span>
+        <span
+          *ngIf="orders[0].orderStatus === 4"
+          style="font-size: 15px; color: red"
+        >
+          {{ "rejected" | translate }}
+        </span>
+        <span
+          *ngIf="orders[0].orderStatus === 5"
+          style="font-size: 15px; color: #0bc15c"
+        >
+          <i class="fa-solid fa-check" style="color: #0bc15c"></i>
+          {{ "returned" | translate }}
+        </span>
+      </div>
+      <div class="d-flex">
+        <span style="font-weight: 400;" class="me-1">{{"orderamount"|translate}}</span>
+        <p>{{totalOrderAmount}}₺</p>
+      </div>
+      <div class="row">
+
+            <div *ngFor="let item of orders; let i = index" class="col-6">
+              <div class="card mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-start"
+                    style="padding: 5px 5px"
+                  >
+                    <img
+                      style="height: 125px; width: 150px"
+                      class="img-fluid"
+                      [src]="item.shoe.imageUrl"
+                    />
+                  </div>
+                  <div
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <div style="font-size: 18px; font-weight: 400">
+                      {{ item.shoe.title }}
+                    </div>
+                    <div style="font-size: 13px; font-weight: 300">
+                      {{ item.shoe.description }}
+                    </div>
+                    <div>{{ item.shoe.price }} ₺</div>
+                  </div>
+                  <div class="d-flex justify-content-end me-2">
+                    <button class="btn btn-outline-dark">
+                      {{"rateproduct"|translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+</div>
