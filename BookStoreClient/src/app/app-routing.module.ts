@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance.component';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     children: [
       {
         path: "",
+        component: WelcomePageComponent
+      },
+      {
+        path: "shop",
         component: HomeComponent
       },
       {

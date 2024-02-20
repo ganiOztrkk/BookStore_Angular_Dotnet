@@ -19,7 +19,7 @@ export class ErrorService {
         this.translate.get('status0error').subscribe((res) => {
           this.swal.callToast(res, 'error');
         });
-        document.location.href = "under-maintenance";
+        this.router.navigateByUrl("under-maintenance");
         break;
       case 404:
         this.translate.get('status404error').subscribe((res) => {
