@@ -22,6 +22,7 @@ import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -41,13 +42,14 @@ export function HttpLoaderFactory(http: HttpClient){
     UnderMaintenanceComponent,
     OrderComponent,
     OrderDetailComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SlickCarouselModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     SweetAlert2Module,

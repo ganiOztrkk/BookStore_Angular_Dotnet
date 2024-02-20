@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { RequestModel } from '../models/request.model';
 import { ResponseModel } from '../models/response.model';
 import { ShoppingCartService } from '../services/shopping-cart.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorService } from '../services/error.service';
+import { ShoeModel } from '../models/shoe.model';
 
 @Component({
   selector: 'app-welcome-page',
@@ -13,66 +13,64 @@ import { ErrorService } from '../services/error.service';
 })
 export class WelcomePageComponent {
   response: ResponseModel = new ResponseModel();
-  categories: any = [];
   pageNumbers: number[] = [];
   request: RequestModel = new RequestModel();
   searchCategory: string = '';
+  newShoes: ShoeModel[] = [];
+
+
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 4,
+    "autoplay": true,
+    "autoplaySpeed": 5000,
+    "pauseOnHover": true,
+    "infinite": true,
+    "arrows": true,
+    "responsive":[
+      {
+        "breakpoint": 990,
+        "settings": {
+          "arrows": true,
+          "infinite": true,
+          "slidesToShow": 3,
+          "slidesToScroll": 3
+        }
+      },
+      {
+        "breakpoint": 768,
+        "settings": {
+          "arrows": true,
+          "infinite": true,
+          "slidesToShow": 1,
+          "slidesToScroll": 1
+        }
+      }
+    ]
+  };
 
 
   constructor(
     private http: HttpClient, 
     public shopping: ShoppingCartService,
-    private spinner: NgxSpinnerService,
     private error: ErrorService
     ) {
-    this.getAll();
-    this.getCategories();
-  }
+      this.getNewest();
+    }
 
 
-  getAll(pageNumber: number = 1) {
-    this.request.pageNumber = pageNumber;
-    this.spinner.show();
-    this.http
-      .post(`https://localhost:7048/api/Shoes/GetAll`, this.request)
+    getNewest(){
+      this.http.get("https://localhost:7048/api/Shoes/GetNewestShoes")
       .subscribe({
-        next: (res) => {
-          this.response = <ResponseModel>res;
-          this.setPageNumber();
-          this.spinner.hide();
-        },
-        error: (err : HttpErrorResponse) => {
-          this.error.errorHandler(err);
-          this.spinner.hide();
-        }
-      });
-  }
-
-  getCategories() {
-    this.http
-      .get('https://localhost:7048/api/Categories/GetAll')
-      .subscribe({
-        next: (res) => {
-          this.categories = res
+        next: (res: any) => {
+          this.newShoes = res;
         },
         error: (err: HttpErrorResponse) => {
           this.error.errorHandler(err);
         }
-      });
-  }
-
-  setPageNumber() {
-    this.pageNumbers = [];
-
-    for (let index = 0; index < this.response.totalPageCount; index++) {
-      this.pageNumbers.push(index + 1);
+      })
     }
-  }
 
-  changeCategory(categoryId: number | null = null) {
-    this.request.categoryId = categoryId;
-    this.getAll(1);
-  }
-
+ 
   
 }

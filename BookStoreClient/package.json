@@ -22,10 +22,13 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@sweetalert2/ngx-sweetalert2": "^12.2.0",
     "i": "^0.3.7",
+    "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
+    "ngx-slick-carousel": "^17.0.0",
     "ngx-spinner": "^16.0.2",
     "npm": "^10.4.0",
     "rxjs": "~7.8.0",
+    "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

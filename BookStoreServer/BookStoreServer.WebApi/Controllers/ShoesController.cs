@@ -52,4 +52,16 @@ public sealed class ShoesController : BaseController
 
         return Ok(response);
     }
+
+    [HttpGet]
+    public IActionResult GetNewestShoes()
+    {
+        var shoeList = _context.Shoes
+            .OrderByDescending(x => x.Id)
+            .Take(10)
+            .ToList();
+        
+        return Ok(shoeList);
+    }
+    
 }
