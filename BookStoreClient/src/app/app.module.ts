@@ -23,6 +23,9 @@ import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ProductManagementComponent } from './admin/product-management/product-management.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -43,6 +46,9 @@ export function HttpLoaderFactory(http: HttpClient){
     OrderComponent,
     OrderDetailComponent,
     WelcomePageComponent,
+    FooterComponent,
+    AdminLoginComponent,
+    ProductManagementComponent,
   ],
   imports: [
     BrowserModule,

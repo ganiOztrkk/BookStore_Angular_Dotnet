@@ -52,6 +52,48 @@ public sealed class ShoesController : BaseController
 
         return Ok(response);
     }
+    
+    [HttpPost]
+    public IActionResult GetAllNoFilter(RequestDto request)
+    {
+        ResponseDto<List<Shoe>> response = new();
+
+        List<Shoe> filteredShoes;
+        
+        if (request.CategoryId != null) 
+        {
+            filteredShoes =
+                _context.ShoeCategories
+                    .Where(x => x.CategoryId == request.CategoryId)
+                    .Select(x=> x.Shoe)
+                    .AsQueryable()
+                    .ToList()!;
+        }
+        else
+        {
+            filteredShoes = _context.Shoes
+                .AsQueryable()
+                .ToList();
+        }
+        
+        filteredShoes =
+            filteredShoes
+                .Where(x => x.Title.ToLower().Contains(request.Search.ToLower()))
+                .ToList();
+        
+        response.Data =
+            filteredShoes
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+        response.PageNumber = request.PageNumber;
+        response.PageSize = request.PageSize;
+        response.TotalPageCount = (int)Math.Ceiling(filteredShoes.Count / (decimal)request.PageSize);
+        response.IsFirstPage = request.PageNumber == 1;
+        response.IsLastPage = request.PageNumber == response.TotalPageCount;
+
+        return Ok(response);
+    }
 
     [HttpGet]
     public IActionResult GetNewestShoes()

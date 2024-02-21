@@ -29,7 +29,7 @@ export class WelcomePageComponent {
     "arrows": true,
     "responsive":[
       {
-        "breakpoint": 990,
+        "breakpoint": 1200,
         "settings": {
           "arrows": true,
           "infinite": true,
@@ -38,7 +38,16 @@ export class WelcomePageComponent {
         }
       },
       {
-        "breakpoint": 768,
+        "breakpoint": 991,
+        "settings": {
+          "arrows": true,
+          "infinite": true,
+          "slidesToShow": 2,
+          "slidesToScroll": 2
+        }
+      },
+      {
+        "breakpoint": 580,
         "settings": {
           "arrows": true,
           "infinite": true,

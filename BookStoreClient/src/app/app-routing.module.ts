@@ -9,6 +9,8 @@ import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance
 import { OrderComponent } from './order/order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ProductManagementComponent } from './admin/product-management/product-management.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,14 @@ const routes: Routes = [
         component: UnderMaintenanceComponent
       }
     ]
+  },
+  {
+    path: "admin-login",
+    component: AdminLoginComponent
+  },
+  {
+    path: "product-management",
+    component: ProductManagementComponent
   }
 ];
 

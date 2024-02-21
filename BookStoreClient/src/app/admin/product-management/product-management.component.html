@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand">Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="product-management">Ürünler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Siparişler</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<h3 class="mt-3">Ürün Yönetimi</h3>
+
+<div class="mt-3">
+  <table class="table table-bordered table-dark text-center align-middle" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Görsel</th>
+        <th>Ürün Adı</th>
+        <th>Açıklama</th>
+        <th>Fiyat</th>
+        <th>Yayın Durumu</th>
+        <th>Liste Durumu</th>
+        <th>Düzenle</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of response.data; track $index) {
+        <tr class="text-center">
+          <td>{{item.id}}</td>
+          <td><img style="height: 70px; width: 70px; border-radius: 100px;" src={{item.imageUrl}} alt="" srcset=""></td>
+          <td>{{item.title}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.price}} ₺</td>
+          <td *ngIf="item.isActive"><span style="font-size: 15px;" class="badge text-bg-success">Yayında</span></td>
+          <td *ngIf="!item.isActive"><span style="font-size: 15px;" class="badge text-bg-warning text-light">Yayın Dışı</span></td>
+          <td *ngIf="item.isDeleted"><span style="font-size: 15px;" class="badge text-bg-danger">Silindi</span></td>
+          <td *ngIf="!item.isDeleted"><span style="font-size: 15px;" class="badge text-bg-success text-light">Listede</span></td>
+          <td><a><i class="fa-solid fa-pen-to-square"></i></a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example" style="float: right">
+      <ul class="pagination">
+        <li class="page-item" *ngIf="!response?.isFirstPage">
+          <a
+            class="page-link"
+            aria-label="Previous"
+            (click)="getAll(response.pageNumber - 1)"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <li
+          class="page-item"
+          *ngFor="let item of pageNumbers"
+          [ngClass]="response.pageNumber === item ? 'active' : ''"
+        >
+          <a class="page-link" (click)="getAll(item)">{{ item }}</a>
+        </li>
+
+        <li class="page-item" *ngIf="!response?.isLastPage">
+          <a
+            class="page-link"
+            aria-label="Next"
+            (click)="getAll(response.pageNumber + 1)"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

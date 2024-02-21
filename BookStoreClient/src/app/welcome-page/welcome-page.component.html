@@ -37,7 +37,7 @@
     <div class="carousel-item active">
       <img
         style="border-radius: 20px; height: 535px"
-        src="https://i.hizliresim.com/on4bove.png"
+        src="https://i.ibb.co/rw2DrsB/Screenshot-2024-02-21-at-14-42-52.png"
         class="d-block w-100"
         alt="..."
       />
@@ -70,44 +70,45 @@
   >
     justkicks store
   </h1>
-  <p>Ürünleri keşfetmeye başla.</p>
+  <p>{{"shopnow"|translate}}</p>
   <button
     routerLink="shop"
     class="btn btn-dark btn-md"
     style="border-radius: 20px; background-color: #212529;"
   >
-    Keşfet
+    {{"shop"|translate}}
   </button>
 </div>
 
 
 <div>
-  <h1 style="color: #212529;">En Yeniler</h1>
+  <h1 style="color: #212529;">{{"newest"|translate}}</h1>
   <ngx-slick-carousel
   class="carousel mt-3"
   #slickModal="slick-carousel"
   [config]="slideConfig"
 >
-  @for (item of newShoes; track item) {
-  <div ngxSlickItem class="slide">
-    <div class="card mb-2" style="width: 300px;">
-      <div class="card-header">
-        <img [src]="item.imageUrl" class="card-img-top" alt="..." />
+    @for (item of newShoes; track item) {
+      <div ngxSlickItem class="slide d-flex justify-content-center align-items-center">
+        <div class="card mb-4" style="width: 270px;">
+          <div class="card-header">
+            <img [src]="item.imageUrl" class="card-img-top" alt="..." />
+          </div>
+          <div class="card-footer text-center">
+            <h5 class="card-text">{{ item.price }}₺</h5>
+            <a
+            class="btn btn-dark w-100"
+            (click)="shopping.addToCart(item)"
+            id="cart"
+            CartAnimation>
+            <i class="fa-solid fa-cart-shopping"></i>
+              {{ "addchart" | translate }}
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="card-footer text-center">
-        <h5 class="card-text">{{ item.price }}₺</h5>
-        <a
-         class="btn btn-dark w-100"
-         (click)="shopping.addToCart(item)"
-         id="cart"
-         CartAnimation>
-         <i class="fa-solid fa-cart-shopping"></i>
-          {{ "addchart" | translate }}
-        </a>
-      </div>
-    </div>
-  </div>
-  }
-
-</ngx-slick-carousel>
+    }
+  </ngx-slick-carousel>
 </div>
+
+<app-footer></app-footer>

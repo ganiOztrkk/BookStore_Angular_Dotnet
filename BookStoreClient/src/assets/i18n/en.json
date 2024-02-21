@@ -89,5 +89,13 @@
     "ordersum": "Order Sum",
     "rateproduct": "Rate the Product",
     "orderamount": "Order Total Amount:",
-    "refund request": "Refund Request"
+    "refund request": "Refund Request",
+    "store": "Store",
+    "contact": "Contact",
+    "follow": "Follow",
+    "newsletter": "Newsletter",
+    "send": "Send",
+    "shop": "Shop",
+    "shopnow": "Shop now.",
+    "newest": "Newest"
 }
