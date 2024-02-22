@@ -11,6 +11,8 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { ProductEditComponent } from './admin/product-edit/product-edit.component';
 
 const routes: Routes = [
   {
@@ -58,6 +60,14 @@ const routes: Routes = [
   {
     path: "product-management",
     component: ProductManagementComponent
+  },
+  {
+    path: "add-product",
+    component: AddProductComponent
+  },
+  {
+    path: "product-edit/:id",
+    component: ProductEditComponent
   }
 ];
 

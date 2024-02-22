@@ -9,5 +9,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<RegisterDto, User>().ReverseMap();
+        CreateMap<CreateShoeDto, Shoe>().ReverseMap();
+        CreateMap<UpdateShoeDto, Shoe>().ReverseMap();
     }
 }

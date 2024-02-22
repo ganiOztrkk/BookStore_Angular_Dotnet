@@ -34,6 +34,7 @@ export class SwalService {
       }
     })
   }
+  
   callPaymentSwal(title: string){
     Swal.fire({
       title: title,

@@ -1,3 +1,13 @@
 a{
     cursor: pointer;
 }
+.fa-pen-to-square{
+    color: white;
+}
+.fa-pen-to-square:hover{
+    color:gold;
+}
+
+.fa-trash:hover{
+    color: red;
+}

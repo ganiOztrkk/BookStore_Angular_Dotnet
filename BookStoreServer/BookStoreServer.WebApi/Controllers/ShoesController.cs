@@ -1,3 +1,4 @@
+using AutoMapper;
 using BookStoreServer.WebApi.Context;
 using BookStoreServer.WebApi.Dtos;
 using BookStoreServer.WebApi.Models;
@@ -7,8 +8,15 @@ namespace BookStoreServer.WebApi.Controllers;
 
 public sealed class ShoesController : BaseController
 {
-    private readonly AppDbContext _context = new AppDbContext();
-    
+    private readonly AppDbContext _context;
+    private readonly IMapper _mapper;
+
+    public ShoesController(AppDbContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
+
     [HttpPost]
     public IActionResult GetAll(RequestDto request)
     {
@@ -72,6 +80,7 @@ public sealed class ShoesController : BaseController
         else
         {
             filteredShoes = _context.Shoes
+                .OrderByDescending(x => x.Id)
                 .AsQueryable()
                 .ToList();
         }
@@ -104,6 +113,47 @@ public sealed class ShoesController : BaseController
             .ToList();
         
         return Ok(shoeList);
+    }
+
+    [HttpPost]
+    public IActionResult Add(CreateShoeDto createShoeDto)
+    {
+        var product = _mapper.Map<Shoe>(createShoeDto);
+        _context.Add(product);
+        _context.SaveChanges();
+        return Ok();
+    }
+    
+    [HttpPost]
+    public IActionResult Update(UpdateShoeDto updateShoeDto)
+    {
+        var product = _context.Shoes.Find(updateShoeDto.Id);
+        if (product is null) return NotFound();
+        
+        _mapper.Map(updateShoeDto, product);
+        
+        _context.Update(product);
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpGet("{id:int}")]
+    public IActionResult Remove(int id)
+    {
+        var shoe = _context.Shoes.Find(id);
+        if (shoe is null) return NotFound();
+
+        shoe.IsDeleted = true;
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpGet("{id:int}")]
+    public IActionResult GetByIdToUpdate(int id)
+    {
+        var product = _context.Shoes.FirstOrDefault(x => x.Id == id);
+        var updateShoeDto = _mapper.Map<UpdateShoeDto>(product);
+        return Ok(updateShoeDto);
     }
     
 }
