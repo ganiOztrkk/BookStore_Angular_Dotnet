@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductCrudService } from '../../services/product-crud.service';
+import { AdminAuthService } from '../../services/admin-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-management',
@@ -11,9 +13,15 @@ export class ProductManagementComponent {
 
 
   constructor(
-    public product: ProductCrudService
+    public product: ProductCrudService,
+    public adminAuth: AdminAuthService,
+    private route: Router
     ) {
-    this.product.getAllNoFilter();
+    if (this.adminAuth.isAdminAuthenticated()) {
+      this.product.getAllNoFilter();
+    }else{
+      this.route.navigateByUrl("/admin")
+    }
   }
 
  

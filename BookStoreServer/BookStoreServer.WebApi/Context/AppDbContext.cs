@@ -18,6 +18,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<OrderStatus> OrderStatus { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+    public DbSet<Admin> Admins { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

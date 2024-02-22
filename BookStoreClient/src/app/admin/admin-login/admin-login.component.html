@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center">Admin Girişi</h1>
+            </div>
+            <div class="card-body">
+                <form #loginForm="ngForm" autocomplete="off">
+                    <div class="form-group">
+                        <label for="username">Admin Username</label>
+                        <input [(ngModel)]="username" type="text" name="username" class="form-control">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="password">Admin Şifre</label>
+                        <input [(ngModel)]="password" type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group mt-2 text-end">
+                        <button (click)="login(username, password)" class="btn btn-dark w-100 mb-1">
+                            Giriş Yap
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
