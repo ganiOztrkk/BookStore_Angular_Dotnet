@@ -28,6 +28,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
 import { ProductEditComponent } from './admin/product-edit/product-edit.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
+import { OrderManagementComponent } from './admin/order-management/order-management.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
@@ -53,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient){
     ProductManagementComponent,
     ProductEditComponent,
     AddProductComponent,
+    OrderManagementComponent,
   ],
   imports: [
     BrowserModule,

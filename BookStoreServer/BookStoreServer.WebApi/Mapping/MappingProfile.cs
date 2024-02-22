@@ -11,5 +11,6 @@ public class MappingProfile : Profile
         CreateMap<RegisterDto, User>().ReverseMap();
         CreateMap<CreateShoeDto, Shoe>().ReverseMap();
         CreateMap<UpdateShoeDto, Shoe>().ReverseMap();
+        CreateMap<GetOrdersDto, Order>().ReverseMap();
     }
 }

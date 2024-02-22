@@ -9,8 +9,19 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/product-management">Ürünler</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" >Siparişler</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Siparişler
+          </a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/order-management" class="dropdown-item">Tüm Siparişler</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a routerLink="/order-management/0" class="dropdown-item">Onay Bekleyenler</a></li>
+            <li><a routerLink="/order-management/1" class="dropdown-item">Hazırlananlar</a></li>
+            <li><a routerLink="/order-management/2" class="dropdown-item">Kargodakiler</a></li>
+            <li><a routerLink="/order-management/3" class="dropdown-item">Teslim Edilenler</a></li>
+            <li><a routerLink="/order-management/5" class="dropdown-item">İade Edilenler</a></li>
+          </ul>
         </li>
       </ul>
     </div>

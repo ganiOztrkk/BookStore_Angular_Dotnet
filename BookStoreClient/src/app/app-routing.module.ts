@@ -13,6 +13,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { ProductEditComponent } from './admin/product-edit/product-edit.component';
+import { OrderManagementComponent } from './admin/order-management/order-management.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,14 @@ const routes: Routes = [
   {
     path: "product-edit/:id",
     component: ProductEditComponent
+  },
+  {
+    path: "order-management",
+    component: OrderManagementComponent
+  },
+  {
+    path: "order-management/:status",
+    component: OrderManagementComponent
   }
 ];
 
