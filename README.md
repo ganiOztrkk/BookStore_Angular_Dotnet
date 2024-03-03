@@ -1,4 +1,7 @@
 # ShoeStore FullStack E-Commerce 
+
+demo: https://ecommerce.ganiozturk.com/
+
 Projem, ayakkabı satışı odaklı bir e-ticaret platformu.
 
 
